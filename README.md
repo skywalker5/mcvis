@@ -2,5 +2,5 @@
 This repo contains the source code for McVis, an interactive information retrieval and recommendation system.
 
 <h3 align="center">
- <img width=800px src=img/tagruler-teaser.gif>
+ <img width=800px src=img/tagruler-teaser.png>
 </h3>
