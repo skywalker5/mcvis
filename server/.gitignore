@@ -1,0 +1,10 @@
+api/__pycache__/
+data/sample_10k_tsne_clustered_bibs.csv
+.DS_Store
+data/*.csv
+data/*.mat
+data/*.pickle
+.ipynb_checkpoints/
+*.pyc
+*.asv
+aminer2_data

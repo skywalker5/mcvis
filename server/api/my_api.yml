@@ -1,0 +1,319 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with CSE6242 team 13 server code.
+  version: "1.0.0"
+  title: cordvis API Specification
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+definitions:
+  docInstance:
+    type: object
+    properties:
+      id:
+        type: string
+      Abstract:
+        type: string
+      Title:
+        type: string
+      Authors:
+        type: array
+        items:
+          type: string
+  answerInstance:
+    type: object
+    properties:
+      id:
+        type: integer
+      text:
+        type: string
+  coordInstance:
+    type: object
+    properties:
+      x:
+        type: number
+        format: float
+      y:
+        type: number
+        format: float
+  autoWord:
+    type: object
+    properties:
+      word:
+        type: string
+
+
+# Paths supported by the server application
+paths:
+  /text/{query_text}:
+    get:
+      operationId: datavis.get_searchquery
+      tags:
+        - Query search
+      summary: Submit the search query from the user
+      parameters:
+        - name: query_text
+          in: path
+          description: query terms
+          type: string
+          required: true
+      responses:
+        200:
+          description: A list of entities containg the query word
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/docInstance'
+  /getcluster:
+    get:
+      operationId: datavis.get_user_defined_cluster
+      tags:
+        - coordinate visualize
+      summary: Get coordinates
+      responses:
+        200:
+          description: A list of coordinates for entities
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/coordInstance'
+  /getrecom/{source_id}:
+    post:
+      operationId: datavis.get_recom_entities
+      tags:
+        - get recommended entities
+      summary: get recommended entities
+      parameters:
+        - name: source_id
+          in: path
+          description: id of selected entity
+          type: integer
+          required: true
+      responses:
+        200:
+          description: A list of coordinates for zoomed entities
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/coordInstance'
+  /getzoom/{coord_str}:
+    post:
+      operationId: datavis.get_zoom_entities
+      tags:
+        - get zoomed entities
+      summary: get zoomed entities
+      parameters:
+        - name: coord_str
+          in: path
+          description: coordinates of clicked point
+          type: string
+          required: true
+      responses:
+        200:
+          description: A list of coordinates for zoomed entities
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/coordInstance'
+  /query_keywords/{query_str}:
+    post:
+      operationId: datavis.parse_query_str
+      tags:
+        - parse query string
+      summary: parse query string
+      parameters:
+        - name: query_str
+          in: path
+          description: query string
+          type: string
+          required: true
+      responses:
+        200:
+          description: A list of query strings
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/coordInstance'
+          description: OK
+  /sliderchange/{slidervalue}:
+    post:
+      operationId: datavis.slider_change
+      tags:
+        - change slider value
+      summary: change slider value
+      parameters:
+        - name: slidervalue
+          in: path
+          description: slider value
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /setsizescatter/{size_str}:
+    post:
+      operationId: datavis.set_window_size_scatter
+      tags:
+        - set window_width_scatter for server
+      summary: Set window width
+      parameters:
+        - name: size_str
+          in: path
+          description: size of embedding window
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /setsizezoom/{size_str}:
+    post:
+      operationId: datavis.set_window_size_zoom
+      tags:
+        - set window_width_scatter for server
+      summary: Set window width
+      parameters:
+        - name: size_str
+          in: path
+          description: size of zoom window
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /filter/{index}:
+    post:
+      operationId: datavis.add_filter_item
+      tags:
+        - Entity filter candidate
+      summary: Submit the entity id and add to the filter list
+      parameters:
+        - name: index
+          in: path
+          description: index of item to filter
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+  /filter:
+    get:
+      operationId: datavis.get_filter_coordinates
+      tags:
+        - coordinate visualize
+      summary: Get coordinates
+      responses:
+        200:
+          description: A list of coordinates for entities
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/coordInstance'
+  /recom/{index}:
+    get:
+      operationId: datavis.get_recom_ents
+      tags:
+        - Entity recommendation
+      summary: Submit the query entity from the user and get recommended set of entities
+      parameters:
+        - name: index
+          in: path
+          description: index of query entity
+          type: integer
+          required: true
+      responses:
+        200:
+          description: A list of entities
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/coordInstance'
+  /scatter:
+    get:
+      operationId: datavis.get_coordinates
+      tags:
+        - coordinate visualize
+      summary: Get coordinates
+      responses:
+        200:
+          description: A list of coordinates for entities
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/coordInstance'
+  /autolist:
+    get:
+      operationId: datavis.get_autocomplete_list
+      tags:
+        - fetch initial list of words for auto completion
+      summary: Get autocomplete keywords
+      responses:
+        200:
+          description: A list of words
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/autoWord'
+  /entitychange_search/{state}:
+    post:
+      operationId: datavis.entity_change_search
+      tags:
+        - change etype state
+      summary: change etype state
+      parameters:
+        - name: state
+          in: path
+          description: etype value
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /entitychange_zoom/{state}:
+    post:
+      operationId: datavis.entity_change_zoom
+      tags:
+        - change etype state
+      summary: change etype state
+      parameters:
+        - name: state
+          in: path
+          description: etype value
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK  
+  /entitychange_recom/{state}:
+    post:
+      operationId: datavis.entity_change_recom
+      tags:
+        - change etype state
+      summary: change etype state
+      parameters:
+        - name: state
+          in: path
+          description: etype value
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK  
+  /ratechange/{rate}:
+    post:
+      operationId: datavis.rate_change
+      tags:
+        - change rate
+      summary: change rate
+      parameters:
+        - name: rate
+          in: path
+          description: rate value
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
