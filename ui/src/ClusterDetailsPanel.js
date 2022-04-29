@@ -6,7 +6,7 @@ import axios from 'axios';
 import api from './api';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import Switch from '@material-ui/core/Switch';
 import TableContainer from '@mui/material/TableContainer';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -131,9 +131,9 @@ class ClusterDetailsPanel extends React.Component {
               Cluster Details
             </Typography>
             <FormGroup row position='right'> 
-            <FormControlLabel onChange={this.handleChange_doc} control={<Checkbox defaultChecked />} label="Document" />
-            <FormControlLabel onChange={this.handleChange_word} control={<Checkbox defaultChecked />} label="Keyword" />
-            <FormControlLabel onChange={this.handleChange_auth} control={<Checkbox defaultChecked />} label="Author" />
+            <FormControlLabel onChange={this.handleChange_doc} control={<Switch defaultChecked />} label="Document" />
+            <FormControlLabel onChange={this.handleChange_word} control={<Switch defaultChecked />} label="Word" />
+            <FormControlLabel onChange={this.handleChange_auth} control={<Switch defaultChecked />} label="Author" />
             </FormGroup>
             
             <Divider/>
@@ -143,8 +143,9 @@ class ClusterDetailsPanel extends React.Component {
                   <TableHead >
                     <TableRow className={classes.recomTableRow}>
                       <TableCell />
-                      <TableCell align="right">Cluster ID</TableCell>
-                      <TableCell align="right">Entities #</TableCell>
+                      <TableCell align="left">Keywords</TableCell>
+                      <TableCell align="left">Cluster</TableCell>
+                      <TableCell align="left">Rating</TableCell>
                       
                     </TableRow>
                   </TableHead>

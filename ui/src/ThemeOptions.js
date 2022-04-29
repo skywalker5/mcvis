@@ -34,6 +34,7 @@ const ThemeOptions = {
   },
   typography: {
     fontFamily: [
+      // 'Museo Sans Rounded 700',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',

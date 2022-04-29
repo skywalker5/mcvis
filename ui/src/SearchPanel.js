@@ -18,7 +18,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import Switch from '@material-ui/core/Switch';
 import FormLabel from '@material-ui/core/FormLabel';
 import {Table, TableBody, TableCell, TableRow} from '@material-ui/core';
 import {TableContainer, TableHead} from '@material-ui/core';
@@ -131,7 +131,7 @@ class SearchPanel extends React.Component {
   
   render(){
     const { classes } = this.props;
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    const label = { inputProps: { 'aria-label': 'Switch demo' } };
     const columns = [
       { field: 'id', headerName: 'ID', minWidth: 30 },
       { field: 'Name', headerName: 'Name', minWidth: 120, flex: 0.4},
@@ -151,7 +151,7 @@ class SearchPanel extends React.Component {
             <Grid direction="column" spacing={0} className={classes.searchGridOuter}>
               <Grid item >
                 <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
-                  Entity Search
+                  Search Panel
                 </Typography>
               </Grid>
               <Divider/>
@@ -172,26 +172,29 @@ class SearchPanel extends React.Component {
                         {...params}
                         id="outlined-basic"
                         variant="standard"
-                        label= "Search Entities"
-                        placeholder="Search"
+                        label= "Search Queries"
+                        placeholder="Search..."
                         className={classes.searchTextField}
                       />
 
                     )}
                   />
-                  <TextField className={classes.entityNum} label="Entity #" variant="outlined" size="small" defaultValue="500"/>
+                  <TextField className={classes.entityNum} label="Top k #" variant="outlined" size="small" defaultValue="500"/>
                 </Grid>
               </Grid>
               <Divider/>
               <Grid item spacing={0}>
                 <Typography variant="h8" id="tableTitle" className={classes.entityType}>
-                  Entity Type
+                  Object Type
                 </Typography>
                 <FormGroup aria-label="position" row>
                   <Grid container direction="row" className={classes.grid} justify={'center'}>
-                    <FormControlLabel onChange={this.handleChange_doc} control={<Checkbox size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Document</Typography>} />
-                    <FormControlLabel onChange={this.handleChange_word} control={<Checkbox size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Keyword</Typography>} />
-                    <FormControlLabel onChange={this.handleChange_auth} control={<Checkbox size="small" defaultChecked/>} label={<Typography variant="h7" className={classes.entityControlLabel}>Author</Typography>} />
+                    <FormControlLabel onChange={this.handleChange_doc} control={<Switch size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Document</Typography>} />
+                    <FormControlLabel onChange={this.handleChange_word} control={<Switch size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Word</Typography>} />
+                    <FormControlLabel onChange={this.handleChange_auth} control={<Switch size="small" defaultChecked/>} label={<Typography variant="h7" className={classes.entityControlLabel}>Author</Typography>} />
+                    {/* <FormControlLabel onChange={this.handleChange_doc} control={<Switch size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Document</Typography>} />
+                    <FormControlLabel onChange={this.handleChange_word} control={<Switch size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Word</Typography>} />
+                    <FormControlLabel onChange={this.handleChange_auth} control={<Switch size="small" defaultChecked/>} label={<Typography variant="h7" className={classes.entityControlLabel}>Author</Typography>} /> */}
                   </Grid>
                 </FormGroup>
               </Grid>
@@ -230,7 +233,7 @@ class SearchPanel extends React.Component {
                   </RadioGroup>
                 </FormControl>
               </Paper>
-              <Button className={classes.searchButton} type="submit" variant="contained" color = "primary">search<SearchIcon className={classes.ssIcon}/></Button>
+              <Button className={classes.searchButton} type="submit" variant="contained" color = "primary"><SearchIcon className={classes.ssIcon}/>search</Button>
             </Grid>
           </form>
         </Paper>

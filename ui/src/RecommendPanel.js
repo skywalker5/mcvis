@@ -5,7 +5,7 @@ import {Grid, List} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import Switch from '@material-ui/core/Switch';
 import TableContainer from '@mui/material/TableContainer';
 import axios from 'axios';
 import api from './api';
@@ -59,12 +59,12 @@ class RecommendPanel extends React.Component {
         <Paper className={classes.recomPaper}>
           <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
             <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
-              Recommended Entities
+              Recommendations
             </Typography>
             <FormGroup row position='right'> 
-            <FormControlLabel onChange={this.handleChange_doc} control={<Checkbox  defaultChecked />} label="Document" />
-            <FormControlLabel onChange={this.handleChange_word} control={<Checkbox  defaultChecked />} label="Keyword" />
-            <FormControlLabel onChange={this.handleChange_auth} control={<Checkbox defaultChecked />} label="Author" />
+            <FormControlLabel onChange={this.handleChange_doc} control={<Switch  defaultChecked />} label="Document" />
+            <FormControlLabel onChange={this.handleChange_word} control={<Switch  defaultChecked />} label="Word" />
+            <FormControlLabel onChange={this.handleChange_auth} control={<Switch defaultChecked />} label="Author" />
             </FormGroup>
             <Divider/>
             {/* <Grid container direction="row" className={classes.pairSearchGrid} spacing={0}> */}
@@ -82,7 +82,7 @@ class RecommendPanel extends React.Component {
                   columns={columns}
                   pageSize={50}
                   rowsPerPageOptions={[50]}
-                  checkboxSelection
+                  SwitchSelection
                   // onSelectionModelChange={this.props.add_selected_data}
                 />
               </List>

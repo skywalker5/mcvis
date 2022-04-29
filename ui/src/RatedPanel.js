@@ -1,16 +1,12 @@
 import React from 'react';
 import {Paper, Divider,  Table, TableBody, TableCell, TableRow,TableHead} from '@material-ui/core';
-import {TextField, Typography} from '@material-ui/core';
-import {Grid, List} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import TableContainer from '@mui/material/TableContainer';
 import axios from 'axios';
 import api from './api';
-import { DataGrid } from '@mui/x-data-grid';
-
+import { LogoNodejs,EnterOutline } from 'react-ionicons'
 class RatedPanel extends React.Component {
   constructor(props) {
       super(props);
@@ -59,15 +55,20 @@ class RatedPanel extends React.Component {
         <Paper className={classes.ratePaper}>
           <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
             <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
-              Rated Entities
+              Ratings
             </Typography>
-            
+            <div className={classes.grow}/>
+            <Button className={classes.submitButton} type="submit" variant="contained" color = "primary">
+              <EnterOutline height="15px" color={'white'}/>
+              Submit
+            </Button>
             <Divider/>
             <TableContainer component={Paper} className={classes.recomTable}>
               <Table size="small">
                 <TableHead >
                   <TableRow className={classes.recomTableRow}>
-                    <TableCell>Entity</TableCell>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Type</TableCell>
                     <TableCell>Rating</TableCell>
                   </TableRow>
                 </TableHead>
@@ -80,8 +81,6 @@ class RatedPanel extends React.Component {
               </Table>
             </TableContainer>
             <Divider/>
-            
-            <Button className={classes.submitButton} type="submit" variant="contained" color = "primary">Submit</Button>
           </Grid>
         </Paper>
       )

@@ -5,7 +5,8 @@ import {Grid} from '@material-ui/core';
 import {Typography} from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import Switch from '@material-ui/core/Switch';
+import Slider from '@material-ui/core/Slider';
 import axios from 'axios';
 import api from './api';
 
@@ -51,6 +52,9 @@ class ZoomPanel extends React.Component {
         });
       };
 
+    handleChangeSlider = (event, newValue) => {
+        
+    };
 
     render(){
         const { classes } = this.props;
@@ -61,11 +65,12 @@ class ZoomPanel extends React.Component {
                         <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
             {"Zoom Panel (" +this.props.doc_num+" Documents, "+this.props.word_num + " Words, "+this.props.auth_num + " Authors)"}
                         </Typography>
-
+                        <div className={classes.grow}/>
+                        <Slider aria-label="Volume" value={30} onChange={this.handleChangeSlider} />
                         <FormGroup row position='right'> 
-                        <FormControlLabel onChange={this.handleChange_doc} control={<Checkbox defaultChecked />} label="Document" />
-                        <FormControlLabel onChange={this.handleChange_word} control={<Checkbox defaultChecked />} label="Keyword" />
-                        <FormControlLabel onChange={this.handleChange_auth} control={<Checkbox defaultChecked />} label="Author" />
+                        <FormControlLabel onChange={this.handleChange_doc} control={<Switch defaultChecked />} label="Document" />
+                        <FormControlLabel onChange={this.handleChange_word} control={<Switch defaultChecked />} label="Word" />
+                        <FormControlLabel onChange={this.handleChange_auth} control={<Switch defaultChecked />} label="Author" />
                         </FormGroup>
                     </Grid>
 

@@ -17,7 +17,7 @@ class Main extends React.Component {
     return (
       <div className={classes.grow}>
           <CssBaseline/>
-            <NavigationBar/>
+            <NavigationBar classes={classes}/>
               <ProjectGrid/>
             <Footer/>
       </div>

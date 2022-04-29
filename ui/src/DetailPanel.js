@@ -134,7 +134,7 @@ class DetailPanel extends React.Component {
       <Paper className={classes.detailPaper}>
         <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
           <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
-            Entity Details
+            Object Details
           </Typography>
           <Divider/>
           <TableContainer component={Paper} className={classes.recomTable}>
@@ -145,7 +145,8 @@ class DetailPanel extends React.Component {
                   <TableCell align="left">ID</TableCell>
                   <TableCell align="left">Type</TableCell>
                   <TableCell align="left">Name</TableCell>
-                  <TableCell align="left">Cluster ID</TableCell>
+                  <TableCell align="left">Cluster</TableCell>
+                  <TableCell align="left">Rating</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
