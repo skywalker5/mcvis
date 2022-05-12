@@ -4,12 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ProjectGrid from './ProjectGrid';
 import NavigationBar from './NavigationBar';
 import Footer from './Footer'
-
-const styles = {
-  grow: {
-    flexGrow: 1,
-  }
-};
+import useStyles from "./StyleOptions";
 
 class Main extends React.Component {
   render() {
@@ -18,11 +13,11 @@ class Main extends React.Component {
       <div className={classes.grow}>
           <CssBaseline/>
             <NavigationBar classes={classes}/>
-              <ProjectGrid/>
+              <ProjectGrid classes={classes}/>
             <Footer/>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(Main);
+export default withStyles(useStyles)(Main);

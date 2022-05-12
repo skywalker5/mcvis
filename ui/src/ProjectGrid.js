@@ -320,4 +320,4 @@ class ProjectGrid extends React.Component {
     }
 };
 
-export default withStyles(useStyles)(ProjectGrid);
+export default ProjectGrid;

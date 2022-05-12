@@ -5,6 +5,9 @@ export const useStyles = (theme => ({
     grid: {
         // padding: theme.spacing(1),
     },
+    grow: {
+      flexGrow: 1,
+    },
     dia:{
         transformBox: "fill-box",
         transformOrigin: "center",
@@ -126,6 +129,21 @@ export const useStyles = (theme => ({
     searchGrid: {
         display: "flex",
         alignItems: "center"
+    },
+    toolbarGrid: {
+        display:"flex",
+    },
+    titleTypo: {
+        flex: 1,
+    },
+    datasetTypo: {
+        flex: 1.2,
+    },
+    nonzeroTypo: {
+        flex: 3,
+    },
+    exportTypo: {
+        flex: 1,
     },
     pairSearchGrid: {
         display: "flex",

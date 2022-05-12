@@ -7,20 +7,18 @@ import SaveAlt from '@mui/icons-material/SaveAlt';
 const NavigationBar = (props)=> {
   return (
       <AppBar position="static">
-        <Toolbar variant="dense">
-          <Typography variant="h4" noWrap>
+        <Toolbar variant="dense" className={props.classes.toolbarGrid}>
+          <Typography variant="h4" className={props.classes.titleTypo} noWrap>
  		        McVis
           </Typography>
-          <div className={props.classes.grow}/>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" className={props.classes.datasetTypo} noWrap>
  		        DATASET | AMinerText
           </Typography>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" className={props.classes.nonzeroTypo} noWrap>
  		        NONZEROS | 16,592,539
           </Typography>
-          <div className={props.classes.grow}/>
           <SaveAlt/>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" className={props.classes.exportTypo} noWrap>
  		        EXPORT
           </Typography>
         </Toolbar>
