@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import ScatterChart from './ScatterChart'
 import {Typography} from '@material-ui/core';
 import {Divider} from '@material-ui/core';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 
@@ -26,13 +27,27 @@ class EmbeddingPanel extends React.Component {
 
     render(){
         const { classes } = this.props;
+    
+        let titleTheme = createMuiTheme({
+          typography: {
+            h6: {
+              fontFamily: [
+                'Museo Sans Rounded',
+              ].join(','),
+              fontSize: 13,
+              fontWeight: 600,
+            }
+          },
+        });
         return (
             <Paper className={classes.embeddingPaper}>
                 <Grid container direction="column" spacing={0} className={classes.recomGridOuter}>
                     <Grid container direction="row" spacing={0}>
+                        <ThemeProvider theme={titleTheme}>
                         <Typography variant="h6" id="tableTitle" className={classes.panelTitle} noWrap>
                             Embedding Panel
                         </Typography>
+                        </ThemeProvider>
                         {/* <Button className={classes.zoomButton} variant="contained" color = "primary" onClick={this.props.region_selected}>Zoom!</Button> */}
                         {/* <div className={classes.grow}/>
                         <FormControl sx={{ m: 1, width: 130, height:30 }}>

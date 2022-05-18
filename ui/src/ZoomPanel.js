@@ -1,12 +1,13 @@
 import React from 'react';
 import {Paper, Divider} from '@material-ui/core';
 import ZoomChart from './ZoomChart'
-import {Grid} from '@material-ui/core';
+import {Grid,Chip} from '@material-ui/core';
 import {Typography} from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import AntSwitch from './AntSwitch';
 import Slider from '@material-ui/core/Slider';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import axios from 'axios';
 import api from './api';
 
@@ -58,19 +59,39 @@ class ZoomPanel extends React.Component {
 
     render(){
         const { classes } = this.props;
+    
+        let titleTheme = createMuiTheme({
+          typography: {
+            h6: {
+              fontFamily: [
+                'Museo Sans Rounded',
+              ].join(','),
+              fontSize: 13,
+              fontWeight: 600,
+            }
+          },
+        });
         return (
             <Paper className={classes.zoomPaper}>
                 <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
                     <Grid container direction="row" className={classes.searchGrid} spacing={0}>
+                        <ThemeProvider theme={titleTheme}>
                         <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
             {"Zoom Panel (" +this.props.doc_num+" Documents, "+this.props.word_num + " Words, "+this.props.auth_num + " Authors)"}
                         </Typography>
+                        </ThemeProvider>
                         <div className={classes.grow}/>
                         <Slider aria-label="Volume" value={30} onChange={this.handleChangeSlider} />
                         <FormGroup row position='right'> 
-                        <FormControlLabel onChange={this.handleChange_doc} control={<Switch defaultChecked />} label="Document" />
-                        <FormControlLabel onChange={this.handleChange_word} control={<Switch defaultChecked />} label="Word" />
-                        <FormControlLabel onChange={this.handleChange_auth} control={<Switch defaultChecked />} label="Author" />
+                            <Chip label={
+                            <FormControlLabel onChange={this.handleChange_doc} control={ <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<Typography variant="h7" className={classes.entityControlLabel}>Document</Typography>} />
+                            }/>
+                            <Chip label={
+                            <FormControlLabel onChange={this.handleChange_word} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<Typography variant="h7" className={classes.entityControlLabel}>Word</Typography>} />
+                            }/>
+                            <Chip label={
+                            <FormControlLabel onChange={this.handleChange_auth} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<Typography variant="h7" className={classes.entityControlLabel}>Author</Typography>} />
+                            }/>
                         </FormGroup>
                     </Grid>
 

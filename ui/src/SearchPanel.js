@@ -3,10 +3,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Chip from '@material-ui/core/Chip';
 import axios from 'axios';
 import api from './api';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -19,6 +19,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import AntSwitch from './AntSwitch';
+import styled from 'styled-components';
 import FormLabel from '@material-ui/core/FormLabel';
 import {Table, TableBody, TableCell, TableRow} from '@material-ui/core';
 import {TableContainer, TableHead} from '@material-ui/core';
@@ -130,6 +132,46 @@ class SearchPanel extends React.Component {
 
   
   render(){
+
+    // const AntSwitch = styled(Switch)(({ theme }) => ({
+    //   width: 28,
+    //   height: 16,
+    //   padding: 0,
+    //   display: 'flex',
+    //   '&:active': {
+    //     '& .MuiSwitch-thumb': {
+    //       width: 15,
+    //     },
+    //     '& .MuiSwitch-switchBase.Mui-checked': {
+    //       transform: 'translateX(9px)',
+    //     },
+    //   },
+    //   '& .MuiSwitch-switchBase': {
+    //     padding: 2,
+    //     '&.Mui-checked': {
+    //       transform: 'translateX(12px)',
+    //       color: '#fff',
+    //       '& + .MuiSwitch-track': {
+    //         opacity: 1,
+    //         backgroundColor: 'rgb(44,56,87)',
+    //       },
+    //     },
+    //   },
+    //   '& .MuiSwitch-thumb': {
+    //     boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+    //     width: 12,
+    //     height: 12,
+    //     borderRadius: 6,
+    //   },
+    //   '& .MuiSwitch-track': {
+    //     borderRadius: 16 / 2,
+    //     opacity: 1,
+    //     backgroundColor: 'rgba(0,0,0,.25)',
+    //     boxSizing: 'border-box',
+    //   },
+    // }));
+
+
     const { classes } = this.props;
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
     const columns = [
@@ -143,6 +185,42 @@ class SearchPanel extends React.Component {
         marks_arr[i] = {value:this.props.year_values[0]+i,
           label:this.props.year_values[0]+i};
     }
+    
+    let titleTheme = createMuiTheme({
+      typography: {
+        h6: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 13,
+          fontWeight: 600,
+        },
+        h5: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 11,
+          fontWeight: 600,
+        }
+      },
+    });
+    let topkLabelTheme = createMuiTheme({
+      typography: {
+        h6: {
+          color:"#4979D1",
+          fontSize: 14,
+          fontWeight: 500,
+        },
+      },
+    });
+    let objectTypoTheme = createMuiTheme({
+      typography: {
+        h6: {
+          color:"#fbfbfb",
+          fontWeight: 700,
+        }
+      },
+    });
 
 
       return (
@@ -150,9 +228,11 @@ class SearchPanel extends React.Component {
           <form className={classes.searchPaper}  noValidate autoComplete="off" onSubmit={this.handleSubmit.bind(this)}>
             <Grid direction="column" spacing={0} className={classes.searchGridOuter}>
               <Grid item >
+                <ThemeProvider theme={titleTheme}>
                 <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
                   Search Panel
                 </Typography>
+                </ThemeProvider>
               </Grid>
               <Divider/>
               <Grid item spacing={0}>
@@ -172,36 +252,53 @@ class SearchPanel extends React.Component {
                         {...params}
                         id="outlined-basic"
                         variant="standard"
-                        label= "Search Queries"
+                        label= "Search..."
                         placeholder="Search..."
                         className={classes.searchTextField}
                       />
 
                     )}
                   />
-                  <TextField className={classes.entityNum} label="Top k #" variant="outlined" size="small" defaultValue="500"/>
+                  <TextField 
+                    className={classes.entityNum} 
+                    label={<ThemeProvider 
+                      theme={topkLabelTheme}>
+                        <Typography variant="h6" >
+                          Top k #
+                        </Typography>
+                      </ThemeProvider>} 
+                    variant="outlined"
+                    size="small"
+                    defaultValue="500"/>
                 </Grid>
               </Grid>
               <Divider/>
               <Grid item spacing={0}>
-                <Typography variant="h8" id="tableTitle" className={classes.entityType}>
-                  Object Type
-                </Typography>
+                <ThemeProvider theme={titleTheme}>
+                  <Typography variant="h5" id="tableTitle" className={classes.entityType}>
+                    Object Type
+                  </Typography>
+                </ThemeProvider>
                 <FormGroup aria-label="position" row>
-                  <Grid container direction="row" className={classes.grid} justify={'center'}>
-                    <FormControlLabel onChange={this.handleChange_doc} control={<Switch size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Document</Typography>} />
-                    <FormControlLabel onChange={this.handleChange_word} control={<Switch size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Word</Typography>} />
-                    <FormControlLabel onChange={this.handleChange_auth} control={<Switch size="small" defaultChecked/>} label={<Typography variant="h7" className={classes.entityControlLabel}>Author</Typography>} />
-                    {/* <FormControlLabel onChange={this.handleChange_doc} control={<Switch size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Document</Typography>} />
-                    <FormControlLabel onChange={this.handleChange_word} control={<Switch size="small" defaultChecked />} label={<Typography variant="h7" className={classes.entityControlLabel}>Word</Typography>} />
-                    <FormControlLabel onChange={this.handleChange_auth} control={<Switch size="small" defaultChecked/>} label={<Typography variant="h7" className={classes.entityControlLabel}>Author</Typography>} /> */}
+                  <Grid container direction="row" className={classes.grid}>
+                    <Chip color="primary" className={classes.objectChip} label={
+                      <FormControlLabel className={classes.formLabel} onChange={this.handleChange_doc} control={ <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
+                    }/>
+                    <Chip color="primary" className={classes.objectChip} label={
+                      <FormControlLabel className={classes.formLabel} onChange={this.handleChange_word} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Word</Typography></ThemeProvider>} />
+                    }/>
+                    <Chip color="primary" className={classes.objectChip} label={
+                      <FormControlLabel className={classes.formLabel} onChange={this.handleChange_auth} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
+                    }/>
                   </Grid>
                 </FormGroup>
               </Grid>
               <Divider/>
-              <Typography variant="h8" id="tableTitle" className={classes.entityType}>
+              <ThemeProvider theme={titleTheme}>
+              <Typography variant="h5" id="tableTitle" className={classes.entityType}>
                 Year Range
               </Typography>
+              </ThemeProvider>
               <Grid item spacing={0}>
                 <Box className={classes.sliderBox}>
                 <Slider

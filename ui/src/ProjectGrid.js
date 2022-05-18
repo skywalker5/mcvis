@@ -217,9 +217,9 @@ class ProjectGrid extends React.Component {
         const classes = this.props.classes;
         return (
             <div className={classes.content}>
-                <Grid container direction="row" className={classes.grid} justify={'center'}>
-                    <Grid container item lg={3} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.grid}>
-                        <Grid item>
+                <Grid container direction="row" className={classes.grid} justify={'space-between'}>
+                    <Grid container item sm={3} md={3} lg={3} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
+                        <Grid item className={classes.upperItem}>
                             <SearchPanel classes={classes} 
                             add_selected_data = {this.add_selected_data} auto_list={this.state.auto_list}
                             year_values = {this.state.year_values}
@@ -253,8 +253,8 @@ class ProjectGrid extends React.Component {
                         </Grid>
                     </Grid>
 
-                    <Grid container item lg={6} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.grid}>
-                        <Grid item >
+                    <Grid container item sm={6} md={6} lg={6} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
+                        <Grid item className={classes.upperItem}>
                             <ZoomPanel 
                                 classes={classes} 
                                 click = {this.click}
@@ -288,8 +288,8 @@ class ProjectGrid extends React.Component {
                         </Grid>
                     </Grid>
 
-                    <Grid container item lg={3} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.grid}>
-                        <Grid item >
+                    <Grid container item sm={3} md={3} lg={3} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
+                        <Grid item className={classes.upperItem} >
                             <ClusterDetailsPanel classes={classes} query_data={this.state.query_data} set_clicked_entity={this.set_clicked_entity} 
                                 selected_history={this.state.selected_history}
                                 data = {this.state.data_points}
@@ -299,7 +299,7 @@ class ProjectGrid extends React.Component {
                                 delete_select_state={this.delete_select_state}/>
                             
                         </Grid>
-                        <Grid item >
+                        <Grid item className={classes.upperItem} >
                             <RatedPanel classes={classes} 
                                 query_data={this.state.query_data} 
                                 set_clicked_entity={this.set_clicked_entity}

@@ -7,6 +7,7 @@ import api from './api';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import TableContainer from '@mui/material/TableContainer';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -76,6 +77,18 @@ class ClusterDetailsPanel extends React.Component {
 
 
   render(){
+    
+    let titleTheme = createMuiTheme({
+      typography: {
+        h6: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 13,
+          fontWeight: 600,
+        }
+      },
+    });
     function Row(props) {
       const { cid, data, zoom_in_clusters, zoom_dict } = props;
       const [open, setOpen] = React.useState(false);
@@ -127,14 +140,11 @@ class ClusterDetailsPanel extends React.Component {
       return (
         <Paper className={classes.historyPaper}>
           <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
+            <ThemeProvider theme={titleTheme}>
             <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
               Cluster Details
             </Typography>
-            <FormGroup row position='right'> 
-            <FormControlLabel onChange={this.handleChange_doc} control={<Switch defaultChecked />} label="Document" />
-            <FormControlLabel onChange={this.handleChange_word} control={<Switch defaultChecked />} label="Word" />
-            <FormControlLabel onChange={this.handleChange_auth} control={<Switch defaultChecked />} label="Author" />
-            </FormGroup>
+            </ThemeProvider>
             
             <Divider/>
               

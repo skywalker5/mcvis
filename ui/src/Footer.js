@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         background:theme.palette.primary.main,
+        minHeight:theme.spacing(3),
     },
 }));
 

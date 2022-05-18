@@ -1,12 +1,21 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { margin } from '@mui/system';
-
 export const useStyles = (theme => ({
+    gridColumn: {
+        padding: theme.spacing(0.5),
+    },
     grid: {
-        // padding: theme.spacing(1),
+        padding: theme.spacing(0),
+    },
+    navText: {
+        paddingLeft: theme.spacing(0.5),
+    },
+    gridItem: {
+        padding: theme.spacing(0),
+    },
+    upperItem: {
+        paddingBottom: theme.spacing(0.6),
     },
     grow: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
     dia:{
         transformBox: "fill-box",
@@ -26,35 +35,32 @@ export const useStyles = (theme => ({
         transformBox: "fill-box",
         transformOrigin:"center",
     },
-    grow: {
-      flexGrow: 1,
-    },
     embeddingPaper: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(0),
         height: "40vh",
     },
     zoomPaper: {
-        padding: theme.spacing(1),
-        height: "46vh",
+        padding: theme.spacing(0),
+        height: "44vh",
     },
     searchPaper: {
-        padding: theme.spacing(1),
-        height: "46vh",
+        padding: theme.spacing(0),
+        height: "44vh",
     },
     recomPaper: {
-        padding: theme.spacing(1),
-        height: "30vh",
+        padding: theme.spacing(0),
+        height: "27.5vh",
     },
     ratePaper: {
-        padding: theme.spacing(1),
-        height: "22vh",
+        padding: theme.spacing(0),
+        height: "23vh",
     },
     detailPaper: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(0),
         height: "40vh",
     },
     historyPaper: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(0),
         height: "32.5vh",
     },
     searchList: {
@@ -81,7 +87,7 @@ export const useStyles = (theme => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(1),
+        padding: theme.spacing(0.5),
     },
     panelTitle: {
         minWidth:"200px",
@@ -91,7 +97,8 @@ export const useStyles = (theme => ({
         paddingLeft: theme.spacing(0.5),
     },
     entityControlLabel: {
-        fontSize:"0.9rem"
+        fontSize:11,
+        paddingLeft: 5,
     },
     queryControlLabel: {
         fontSize:"0.8rem"
@@ -132,18 +139,21 @@ export const useStyles = (theme => ({
     },
     toolbarGrid: {
         display:"flex",
+        justifyContent: "space-between",
+        minHeight:theme.spacing(4),
     },
     titleTypo: {
-        flex: 1,
+        flex:1,
     },
     datasetTypo: {
-        flex: 1.2,
+        flex:1.3,
+        display:"flex",
     },
     nonzeroTypo: {
-        flex: 3,
+        flex:2.8
     },
     exportTypo: {
-        flex: 1,
+        display:"flex",
     },
     pairSearchGrid: {
         display: "flex",
@@ -176,6 +186,23 @@ export const useStyles = (theme => ({
     },
     selectSymbol: {
         zIndex: 1,
+    },
+    objectChip: {
+        "& .MuiChip-label":{
+            paddingLeft:0,
+            paddingRight:10,
+        },
+        marginLeft:10,
+        marginBottom:8,
+        height:14,
+
+    },
+    formLabel: {
+        // "& .MuiFormControlLabel-label":{
+        //     "vertical-align":null,
+        // },
+        marginLeft:0,
+        marginRight:0,
     },
     stackChip: {
         marginLeft:'auto',

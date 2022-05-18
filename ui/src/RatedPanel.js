@@ -4,6 +4,7 @@ import {Typography} from '@material-ui/core';
 import {Grid} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TableContainer from '@mui/material/TableContainer';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import axios from 'axios';
 import api from './api';
 import { LogoNodejs,EnterOutline } from 'react-ionicons'
@@ -47,6 +48,18 @@ class RatedPanel extends React.Component {
   };
   render(){
     const {classes} = this.props;
+    
+    let titleTheme = createMuiTheme({
+      typography: {
+        h6: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 13,
+          fontWeight: 600,
+        }
+      },
+    });
     const columns = [
       { field: 'Name', headerName: 'Name', flex: 0.4 },
       { field: 'Type', headerName: 'Type', flex: 0.2 }
@@ -54,9 +67,11 @@ class RatedPanel extends React.Component {
       return (
         <Paper className={classes.ratePaper}>
           <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
+            <ThemeProvider theme={titleTheme}>
             <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
               Ratings
             </Typography>
+            </ThemeProvider>
             <div className={classes.grow}/>
             <Button className={classes.submitButton} type="submit" variant="contained" color = "primary">
               <EnterOutline height="15px" color={'white'}/>

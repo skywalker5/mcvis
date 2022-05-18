@@ -1,18 +1,21 @@
 const ThemeOptions = {
   props: {
     MuiGrid: {
-      spacing: 2
-    }
+      spacing: 0
+    },
+    MuiOutlinedInput: {
+      borderColor: "red",
+    },
   },
   palette: {
     type: 'light',
     primary: {
       // main: '#4876d6',
-      main: 'rgb(44,56,87)',
+      main: '#4979D1',
       contrastText: '#fbfbfb',
     },
     secondary: {
-      main: '#2aa298',
+      main: 'rgb(44,56,87)',
       contrastText: '#fbfbfb',
     },
     warning: {
@@ -25,6 +28,7 @@ const ThemeOptions = {
     },
     text: {
       primary: '#403f53',
+      // secondary: '#4979D1',
       secondary: '#90a7b2',
     },
     error: {
@@ -34,7 +38,7 @@ const ThemeOptions = {
   },
   typography: {
     fontFamily: [
-      // 'Museo Sans Rounded 700',
+      'Museo Sans Rounded',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',

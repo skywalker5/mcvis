@@ -7,6 +7,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PropTypes from "prop-types";
 import Rating from "@mui/material/Rating";
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import axios from 'axios';
 import api from './api';
 
@@ -17,6 +18,18 @@ class DetailPanel extends React.Component {
   }
 
   render(){
+    
+    let titleTheme = createMuiTheme({
+      typography: {
+        h6: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 13,
+          fontWeight: 600,
+        }
+      },
+    });
     function Row(props) {
       const { row, onClick } = props;
       const [open, setOpen] = React.useState(false);
@@ -133,9 +146,11 @@ class DetailPanel extends React.Component {
     return (
       <Paper className={classes.detailPaper}>
         <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
+          <ThemeProvider theme={titleTheme}>
           <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
             Object Details
           </Typography>
+          </ThemeProvider>
           <Divider/>
           <TableContainer component={Paper} className={classes.recomTable}>
             <Table size="small">

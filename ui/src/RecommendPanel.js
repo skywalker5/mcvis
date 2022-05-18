@@ -7,6 +7,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import TableContainer from '@mui/material/TableContainer';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import axios from 'axios';
 import api from './api';
 import { DataGrid } from '@mui/x-data-grid';
@@ -51,6 +52,18 @@ class RecommendPanel extends React.Component {
   };
   render(){
     const {classes} = this.props;
+    
+    let titleTheme = createMuiTheme({
+      typography: {
+        h6: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 13,
+          fontWeight: 600,
+        }
+      },
+    });
     const columns = [
       { field: 'Name', headerName: 'Name', flex: 0.4 },
       { field: 'Type', headerName: 'Type', flex: 0.2 }
@@ -58,9 +71,11 @@ class RecommendPanel extends React.Component {
       return (
         <Paper className={classes.recomPaper}>
           <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
+            <ThemeProvider theme={titleTheme}>
             <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
               Recommendations
             </Typography>
+            </ThemeProvider>
             <FormGroup row position='right'> 
             <FormControlLabel onChange={this.handleChange_doc} control={<Switch  defaultChecked />} label="Document" />
             <FormControlLabel onChange={this.handleChange_word} control={<Switch  defaultChecked />} label="Word" />
