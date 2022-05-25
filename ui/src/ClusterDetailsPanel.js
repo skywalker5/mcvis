@@ -7,10 +7,14 @@ import api from './api';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Rating from "@mui/material/Rating";
+import { interpolateTurbo } from 'd3-scale-chromatic'
+import {Star, StarBorder}  from '@mui/icons-material';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import TableContainer from '@mui/material/TableContainer';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import SquareRoundedIcon from '@mui/icons-material/SquareRounded';
 
 
 
@@ -26,8 +30,8 @@ class ClusterDetailsPanel extends React.Component {
   
 
   CreateData(
-    cluster_name: string,
-    total_entity_num: number,
+    cluster_name,
+    total_entity_num,
   ) {
     return {
       cluster_name,
@@ -89,6 +93,53 @@ class ClusterDetailsPanel extends React.Component {
         }
       },
     });
+    let tableHeadTheme = createMuiTheme({
+      overrides: {
+          MuiTableCell: {
+            stickyHeader: {  //This can be referred from Material UI API documentation. 
+                paddingTop: 2,
+                paddingBottom: 2,
+                borderBottom: false,
+                borderTop: false,
+                paddingLeft: 0,
+                paddingRight: 0,
+                backgroundColor:"rgb(244,230,198)",
+            },
+          },
+      },
+      typography: {
+        h6: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 12,
+          fontWeight: 600,
+          lineHeight:1.2,
+        }
+      },
+    });
+    let tableBodyTheme = createMuiTheme({
+      overrides: {
+          MuiTableCell: {
+              root: {  //This can be referred from Material UI API documentation. 
+                  paddingTop: 2,
+                  paddingBottom: 2,
+                  paddingLeft: 0,
+                  paddingRight: 0,
+              },
+          },
+      },
+      typography: {
+        h6: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 13,
+          fontWeight: 400,
+          lineHeight:1.2,
+        }
+      },
+    });
     function Row(props) {
       const { cid, data, zoom_in_clusters, zoom_dict } = props;
       const [open, setOpen] = React.useState(false);
@@ -98,7 +149,7 @@ class ClusterDetailsPanel extends React.Component {
       return (
         <React.Fragment>
           <TableRow id={cid} sx={{ '& > *': { borderBottom: 'unset' } }}> 
-            <TableCell>
+            <TableCell className={classes.recomTableArrowCol} padding="checkbox">
               <IconButton
                 aria-label="expand row"
                 size="small"
@@ -107,13 +158,24 @@ class ClusterDetailsPanel extends React.Component {
                 {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
               </IconButton>
             </TableCell>
-            <TableCell align="right" component="th" scope="row">
-              {cid}
+            <TableCell align="left" component="th" scope="row">
+              <Typography variant="h6">
+                {cid}
+              </Typography>
             </TableCell>
-            <TableCell align="right">{Object.keys(zoom_dict).filter((index) => (
-              zoom_dict[index].cid === cid
-            )
-            ).length}</TableCell>
+            <TableCell className={classes.detailTableCluCol} align="left">
+            <Grid container direction="row" className={classes.grid}>
+              <Typography variant="h6">
+                {cid}
+              </Typography>
+              <SquareRoundedIcon className={classes.sqIcon} sx={{ color: interpolateTurbo(cid/20.0) }}/>
+            </Grid>
+            </TableCell>
+            <TableCell className={classes.recomTableRatingCol} >
+            <Rating icon={<Star sx={{ fontSize: 15, }} />}
+                  emptyIcon={<StarBorder sx={{ fontSize: 15, }} />} name="rating" defaultValue= {2.5} precision={0.5} />
+              {/* <Rating name="rating" defaultValue= {2.5} precision={0.5} />  */}
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -145,31 +207,31 @@ class ClusterDetailsPanel extends React.Component {
               Cluster Details
             </Typography>
             </ThemeProvider>
-            
-            <Divider/>
-              
               <TableContainer component={Paper} className={classes.recomTable}>
-                <Table size="small">
-                  <TableHead >
-                    <TableRow className={classes.recomTableRow}>
-                      <TableCell />
-                      <TableCell align="left">Keywords</TableCell>
-                      <TableCell align="left">Cluster</TableCell>
-                      <TableCell align="left">Rating</TableCell>
-                      
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {cluster_ids.map((cid) => (
-                      <Row
-                        cid={cid} 
-                        data={this.props.data}
-                        zoom_in_clusters={this.props.zoom_in_clusters}
-                        zoom_dict = {this.props.zoom_dict}
-                      />
-                    ))}
-                  </TableBody>
-                </Table>
+                  <Table stickyHeader>
+                    <ThemeProvider theme={tableHeadTheme}>
+                    <TableHead >
+                      <TableRow className={classes.recomTableRow}>
+                        <TableCell padding="checkbox" className={classes.recomTableArrowCol} />
+                        <TableCell align="left"><Typography variant="h6">Keywords</Typography></TableCell>
+                        <TableCell className={classes.detailTableCluCol} align="left"><Typography variant="h6">Cluster</Typography></TableCell>
+                        <TableCell className={classes.recomTableRatingCol} align="left"><Typography variant="h6">Rating</Typography></TableCell>
+                      </TableRow>
+                    </TableHead>
+                    </ThemeProvider>
+                    <ThemeProvider theme={tableBodyTheme}>
+                    <TableBody>
+                      {cluster_ids.map((cid) => (
+                        <Row
+                          cid={cid} 
+                          data={this.props.data}
+                          zoom_in_clusters={this.props.zoom_in_clusters}
+                          zoom_dict = {this.props.zoom_dict}
+                        />
+                      ))}
+                    </TableBody>
+                    </ThemeProvider>
+                  </Table>
               </TableContainer>
           </Grid>
         </Paper>

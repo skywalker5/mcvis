@@ -56,7 +56,7 @@ const NavigationBar = (props)=> {
             </Typography>
             </ThemeProvider>
             <ThemeProvider theme={nameTheme}>
-            <Typography className={props.classes.navText} variant="h6" noWrap>
+            <Typography className={props.classes.nameTypo} variant="h6" noWrap>
               | AMinerText
             </Typography>
             </ThemeProvider>
@@ -69,14 +69,14 @@ const NavigationBar = (props)=> {
           </Typography>
           </ThemeProvider>
           <ThemeProvider theme={nameTheme}>
-          <Typography className={props.classes.navText} variant="h6" noWrap>
-          | 16,592,539
+          <Typography className={props.classes.nameTypo} variant="h6" noWrap>
+          | 16,592,039
           </Typography>
           </ThemeProvider>
           </Typography>
           <ThemeProvider theme={nameTheme}>
           <Typography variant="h6" className={props.classes.exportTypo} noWrap>
-          <SaveAlt/>
+          <SaveAlt className={props.classes.saveIcon} />
  		        EXPORT
           </Typography>
           </ThemeProvider>

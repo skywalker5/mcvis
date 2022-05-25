@@ -71,31 +71,66 @@ class ZoomPanel extends React.Component {
             }
           },
         });
+        let objectTypoTheme = createMuiTheme({
+          typography: {
+            h6: {
+              color:"#fbfbfb",
+              fontWeight: 700,
+            }
+          },
+        });
+        let tsneTheme = createMuiTheme({
+          typography: {
+            h6: {
+              fontFamily: [
+                'Museo Sans Rounded',
+              ].join(','),
+              fontSize: 11,
+              fontWeight: 300,
+            }
+          },
+        });
         return (
             <Paper className={classes.zoomPaper}>
                 <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
                     <Grid container direction="row" className={classes.searchGrid} spacing={0}>
                         <ThemeProvider theme={titleTheme}>
-                        <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
-            {"Zoom Panel (" +this.props.doc_num+" Documents, "+this.props.word_num + " Words, "+this.props.auth_num + " Authors)"}
+                        <Grid container direction="row" className={classes.zoomStack}>
+                        <Typography variant="h6" id="tableTitle" className={classes.zoomTitle1}>
+                            {"Zoom Panel"}
                         </Typography>
+                        <Typography variant="h6" id="tableTitle" className={classes.zoomTitle2}>
+                            {"("+this.props.doc_num+" Documents, "+this.props.word_num + " Words, "+this.props.auth_num + " Authors)"}
+                        </Typography>
+                        </Grid>
+                        <Grid container direction="row" className={classes.zoomTsne}>
+                            <Grid container direction="column" className={classes.zoomTsne}>
+                            <ThemeProvider theme={tsneTheme}>
+                            <Typography noWrap variant="h6" id="tableTitle" className={classes.zoomTitle1}>
+                                {"T-SNE Shrinkage"}
+                            </Typography>
+                            </ThemeProvider>
+                            <Slider defaultValue={0.7} step={0.05} min={0} max={1} valueLabelDisplay="auto"/>
+                            </Grid>
+                        </Grid>
                         </ThemeProvider>
-                        <div className={classes.grow}/>
-                        <Slider aria-label="Volume" value={30} onChange={this.handleChangeSlider} />
-                        <FormGroup row position='right'> 
-                            <Chip label={
-                            <FormControlLabel onChange={this.handleChange_doc} control={ <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<Typography variant="h7" className={classes.entityControlLabel}>Document</Typography>} />
-                            }/>
-                            <Chip label={
-                            <FormControlLabel onChange={this.handleChange_word} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<Typography variant="h7" className={classes.entityControlLabel}>Word</Typography>} />
-                            }/>
-                            <Chip label={
-                            <FormControlLabel onChange={this.handleChange_auth} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<Typography variant="h7" className={classes.entityControlLabel}>Author</Typography>} />
-                            }/>
-                        </FormGroup>
+                        {/* <div className={classes.grow}/> */}
                     </Grid>
 
                     <Divider/>
+                    <FormGroup aria-label="position" row>
+                    <Grid direction="column" className={classes.grid}>
+                        <Chip color="primary" className={classes.objectChip2} label={
+                        <FormControlLabel className={classes.formLabel} onChange={this.handleChange_doc} control={ <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
+                        }/>
+                        <Chip color="primary" className={classes.objectChip2} label={
+                        <FormControlLabel className={classes.formLabel} onChange={this.handleChange_word} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Word</Typography></ThemeProvider>} />
+                        }/>
+                        <Chip color="primary" className={classes.objectChip2} label={
+                        <FormControlLabel className={classes.formLabel} onChange={this.handleChange_auth} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
+                        }/>
+                    </Grid>
+                    </FormGroup>
                     <ZoomChart data={this.props.dpoints} cluster_list={this.props.cluster_list} click={this.props.click}
                         search_select_list={this.props.search_select_list}
                         current_clicked = {this.props.current_clicked}

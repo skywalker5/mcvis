@@ -20,6 +20,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import AntSwitch from './AntSwitch';
+import QueryRadio from './QueryRadio';
 import styled from 'styled-components';
 import FormLabel from '@material-ui/core/FormLabel';
 import {Table, TableBody, TableCell, TableRow} from '@material-ui/core';
@@ -221,6 +222,21 @@ class SearchPanel extends React.Component {
         }
       },
     });
+    let queryTypoTheme = createMuiTheme({
+      typography: {
+        h6: {
+          fontSize:12
+        },
+      },
+    });
+    let searchButtonTheme = createMuiTheme({
+      typography: {
+        h6: {
+          fontSize:11,
+          fontWeight: 600
+        },
+      },
+    });
 
 
       return (
@@ -314,23 +330,28 @@ class SearchPanel extends React.Component {
                 </Box>
               </Grid>
               <Divider/>
-              <Paper className={classes.queryPaper}>
+              <Paper elevation={0} className={classes.queryPaper}>
                 <FormControl>
-                  <Typography variant="h8" id="tableTitle" className={classes.entityType}>
+                  <ThemeProvider theme={titleTheme}>
+                  <Typography variant="h5" id="tableTitle" className={classes.entityType}>
                     Queries
                   </Typography>
+                  </ThemeProvider>
                   <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     name="radio-buttons-group"
                     onChange={this.handleRadioChange}
                   >
                     {this.state.query_candidates.map((s) => (
-                      <FormControlLabel value={s} control={<Radio size="small"/>} label={<Typography variant="h7" className={classes.queryControlLabel}>{s}</Typography>} />
+                      <FormControlLabel className={classes.queryFormLabel} value={s} control={<Radio size="small"/>} label={<ThemeProvider theme={queryTypoTheme}><Typography variant="h6" noWrap className={classes.queryControlLabel}>{s}</Typography></ThemeProvider>} />
                     ))}
                   </RadioGroup>
                 </FormControl>
               </Paper>
-              <Button className={classes.searchButton} type="submit" variant="contained" color = "primary"><SearchIcon className={classes.ssIcon}/>search</Button>
+              <Grid direction="row" className={classes.searchButtonGrid}>
+              <div className={classes.grow}/>
+                <Button className={classes.searchButton} type="submit" variant="contained" color = "primary"><SearchIcon className={classes.ssIcon}/><ThemeProvider theme={searchButtonTheme}><Typography variant="h6">search</Typography></ThemeProvider></Button>
+                </Grid>
             </Grid>
           </form>
         </Paper>

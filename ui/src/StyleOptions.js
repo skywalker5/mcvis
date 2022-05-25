@@ -28,8 +28,17 @@ export const useStyles = (theme => ({
         transform:"rotate(45deg)",
         zIndex:1
     },
+    saveIcon:{
+        transform:"scale(0.7)"
+    },
     ssIcon:{
-        transform:"scale(0.8)"
+        transform:"scale(0.6)"
+    },
+    submitIcon:{
+        transform:"scale(0.6)"
+    },
+    sqIcon:{
+        transform:"scale(0.7)"
     },
     ellip:{
         transformBox: "fill-box",
@@ -74,11 +83,41 @@ export const useStyles = (theme => ({
         maxHeight: "100%",
         overflow:"auto"
     },
-    recomTable: {
+    recomTableCont: {
         flex: 1,
-        overflow: "auto"
+        overflow: "auto",
+    },
+    recomTable: {
+        
+    },
+    recomTableArrowCol: {
+        minWidth:30,
+    },
+    recomTableIDCol: {
+        minWidth:45,
+    },
+    recomTableTypeCol: {
+        minWidth:40,
+    },
+    recomTableNameCol: {
+        width:"auto",
+    },
+    recomTableClusterCol : {
+        minWidth:45,
+    },
+    recomTableRatingCol : {
+        minWidth:80,
+    },
+    detailTableCluCol: {
+        minWidth:45,
+    },
+    recomTableRow:{
+        backgroundColor:"rgb(244,230,198)",
     },
     slider:{
+        "&.MuiSlider-marked": {
+          marginBottom: 12,
+        },
         // marginRight:theme.spacing(3)
     },
     sliderBox:{
@@ -90,7 +129,7 @@ export const useStyles = (theme => ({
         padding: theme.spacing(0.5),
     },
     panelTitle: {
-        minWidth:"200px",
+        // minWidth:"200px",
         paddingLeft: theme.spacing(1),
     },
     entityType: {
@@ -101,13 +140,13 @@ export const useStyles = (theme => ({
         paddingLeft: 5,
     },
     queryControlLabel: {
-        fontSize:"0.8rem"
+        
     },
     searchGridOuter: {
         height: "100%",
         display: "flex",
         padding: theme.spacing(0),
-        paddingBottom: theme.spacing(1),
+        paddingBottom: 4,
     },
     recomGridOuter: {
         height: "100%",
@@ -119,6 +158,27 @@ export const useStyles = (theme => ({
         paddingLeft: theme.spacing(1),
         paddingRight: theme.spacing(1),
         paddingBottom: theme.spacing(1.5),
+    },
+    zoomStack: {
+        flex: 2,
+        paddingLeft: theme.spacing(1),
+        paddingRight: theme.spacing(1),
+        paddingBottom: theme.spacing(1.5),
+    },
+    rateStack: {
+        flex: 2,
+    },
+    zoomTsne: {
+        flex: 0.5,
+    },
+    zoomTitle1: {
+        
+    },
+    zoomTitle2: {
+        paddingLeft: theme.spacing(1),
+    },
+    zoomTypo: {
+        flex: 0.7
     },
     entityNum: {
         flex: 0.7
@@ -137,6 +197,10 @@ export const useStyles = (theme => ({
         display: "flex",
         alignItems: "center"
     },
+    zoomGrid: {
+        display: "flex",
+        alignItems: "center"
+    },
     toolbarGrid: {
         display:"flex",
         justifyContent: "space-between",
@@ -149,6 +213,9 @@ export const useStyles = (theme => ({
         flex:1.3,
         display:"flex",
     },
+    nameTypo: {
+        marginLeft:4,
+    },
     nonzeroTypo: {
         flex:2.8
     },
@@ -159,19 +226,23 @@ export const useStyles = (theme => ({
         display: "flex",
         alignItems: "center"
     },
+    searchButtonGrid: {
+        display: "flex",
+    },
     searchButton: {
-        height: theme.spacing(4),
-        maxHeight: theme.spacing(4),
+        height: theme.spacing(2.5),
+        width: theme.spacing(10.5),
         marginTop: theme.spacing(0.5),
-        marginRight: theme.spacing(2),
-        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(1),
+        borderRadius: 8,
     },
     submitButton: {
-        height: theme.spacing(4),
-        maxHeight: theme.spacing(4),
+        height: theme.spacing(2.5),
+        width: theme.spacing(10.5),
         marginTop: theme.spacing(0.5),
-        marginRight: theme.spacing(2),
-        marginLeft: theme.spacing(2),
+        marginBottom: theme.spacing(0.5),
+        marginRight: theme.spacing(1),
+        borderRadius: 8,
     },
     zoomButton: {
         height: theme.spacing(3.5),
@@ -193,7 +264,18 @@ export const useStyles = (theme => ({
             paddingRight:10,
         },
         marginLeft:10,
-        marginBottom:8,
+        marginBottom:4,
+        marginTop:2,
+        height:14,
+
+    },
+    objectChip2: {
+        "& .MuiChip-label":{
+            paddingLeft:0,
+            paddingRight:10,
+        },
+        marginLeft:4,
+        marginBottom:4,
         height:14,
 
     },
@@ -203,6 +285,10 @@ export const useStyles = (theme => ({
         // },
         marginLeft:0,
         marginRight:0,
+    },
+    queryFormLabel: {
+        marginLeft: -8,
+        marginRight: 0,
     },
     stackChip: {
         marginLeft:'auto',

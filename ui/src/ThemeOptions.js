@@ -1,4 +1,42 @@
 const ThemeOptions = {
+  overrides:{
+    MuiRadio: {
+      root:{
+      //   // padding:3
+        paddingTop:0,
+        paddingBottom:0,
+        paddingRight:3,
+      }
+    },
+    MuiSlider: {
+      thumb:{
+        width: 8,
+        height: 8,
+        marginTop:-2.5,
+        marginLeft:-2.5
+      },
+      track: {
+        height: 3
+      },
+      rail: {
+        height: 3
+      },
+      // mark:{
+      // }
+      markLabel:{
+        Active:{
+          fontSize:20,
+
+        },
+        fontSize:10,
+        // transform:"rotate(45deg)"
+      },
+      mark:{
+        height:3,
+        width:3
+      },
+    },
+  },
   props: {
     MuiGrid: {
       spacing: 0

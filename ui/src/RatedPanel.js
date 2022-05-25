@@ -4,6 +4,7 @@ import {Typography} from '@material-ui/core';
 import {Grid} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TableContainer from '@mui/material/TableContainer';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import axios from 'axios';
 import api from './api';
@@ -60,6 +61,49 @@ class RatedPanel extends React.Component {
         }
       },
     });
+    let rateTypoTheme = createMuiTheme({
+      typography: {
+        h6: {
+          fontSize:11,
+          fontWeight: 600,
+        }
+      },
+    });
+    let tableHeadTheme = createMuiTheme({
+      overrides: {
+          MuiTableCell: {
+            stickyHeader: {  //This can be referred from Material UI API documentation. 
+                paddingTop: 2,
+                paddingBottom: 2,
+                borderBottom: false,
+                borderTop: false,
+                paddingLeft: 0,
+                paddingRight: 0,
+                backgroundColor:"rgb(244,230,198)",
+            },
+          },
+      },
+      typography: {
+        h6: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 12,
+          fontWeight: 600,
+        }
+      },
+    });
+    let tableBodyTheme = createMuiTheme({
+      overrides: {
+          MuiTableCell: {
+              root: {  //This can be referred from Material UI API documentation. 
+                  paddingTop: 2,
+                  paddingBottom: 2,
+              },
+          },
+      },
+    });
+    
     const columns = [
       { field: 'Name', headerName: 'Name', flex: 0.4 },
       { field: 'Type', headerName: 'Type', flex: 0.2 }
@@ -67,32 +111,42 @@ class RatedPanel extends React.Component {
       return (
         <Paper className={classes.ratePaper}>
           <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
-            <ThemeProvider theme={titleTheme}>
-            <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
-              Ratings
-            </Typography>
-            </ThemeProvider>
-            <div className={classes.grow}/>
-            <Button className={classes.submitButton} type="submit" variant="contained" color = "primary">
-              <EnterOutline height="15px" color={'white'}/>
-              Submit
-            </Button>
-            <Divider/>
+            <Grid container direction="row" className={classes.zoomGrid} spacing={0}>
+              <Grid container direction="row" className={classes.rateStack}>
+                <ThemeProvider theme={titleTheme}>
+                <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
+                  Ratings
+                </Typography>
+                </ThemeProvider>
+                <div className={classes.grow}/>
+                <Button className={classes.submitButton} type="submit" variant="contained" color = "primary">
+                  {/* <EnterOutline height="15px" color={'white'}/> */}
+                  <ExitToAppIcon className={classes.submitIcon}/>
+                  <ThemeProvider theme={rateTypoTheme}><Typography variant="h6">Submit</Typography></ThemeProvider>
+                </Button>
+              </Grid>
+            </Grid>
+            {/* <Divider/> */}
             <TableContainer component={Paper} className={classes.recomTable}>
-              <Table size="small">
+              <Table stickyHeader>
+                <ThemeProvider theme={tableHeadTheme}>
                 <TableHead >
                   <TableRow className={classes.recomTableRow}>
-                    <TableCell>ID</TableCell>
-                    <TableCell>Type</TableCell>
-                    <TableCell>Rating</TableCell>
+                    <TableCell className={classes.recomTableArrowCol} padding="checkbox" />
+                    <TableCell align="left"><Typography variant="h6">ID</Typography></TableCell>
+                    <TableCell className={classes.detailTableCluCol} align="left"><Typography variant="h6">Type</Typography></TableCell>
+                    <TableCell className={classes.recomTableRatingCol} align="left"><Typography variant="h6">Rating</Typography></TableCell>
                   </TableRow>
                 </TableHead>
+                </ThemeProvider>
+                <ThemeProvider theme={tableBodyTheme}>
                 <TableBody>
-                  <TableRow className={classes.recomTableRow}>
+                  {/* <TableRow className={classes.recomTableRow}>
                     <TableCell>Entity ID</TableCell>
                     <TableCell>Entities #</TableCell>
-                  </TableRow>
+                  </TableRow> */}
                 </TableBody>
+                </ThemeProvider>
               </Table>
             </TableContainer>
             <Divider/>
