@@ -124,7 +124,7 @@ class DetailPanel extends React.Component {
                 {row.Type}
               </Typography>
             </TableCell>
-            <TableCell><Typography variant="h6">{row.Name}</Typography></TableCell>
+            <TableCell className={classes.recomTableNameCol}><Typography variant="h6">{row.Name}</Typography></TableCell>
             <TableCell className={classes.recomTableClusterCol} >
               <Grid container direction="row" className={classes.grid}>
                 <Typography variant="h5">{row.cid}

@@ -222,6 +222,13 @@ class SearchPanel extends React.Component {
         }
       },
     });
+    let autocomTypoTheme = createMuiTheme({
+      typography: {
+        h6: {
+          // fontWeight: 700,
+        }
+      },
+    });
     let queryTypoTheme = createMuiTheme({
       typography: {
         h6: {
@@ -253,6 +260,7 @@ class SearchPanel extends React.Component {
               <Divider/>
               <Grid item spacing={0}>
                 <Grid container direction="row" className={classes.searchGrid} spacing={0}>
+                <ThemeProvider theme={autocomTypoTheme}>
                   <Autocomplete
                     multiple
                     id="tags-filled"
@@ -262,6 +270,11 @@ class SearchPanel extends React.Component {
                     freeSolo
                     // getOptionLabel={(option) => option.word}
                     onChange={ (e,v)=>this.handleQuery(e,v)}
+                    renderTags={(value, getTagProps) =>
+                      value.map((option, index) => (
+                        <Chip className={classes.autoChip} size="small" label={<Typography variant="h6" className={classes.autocomLabel}>{option}</Typography>} {...getTagProps({ index })} />
+                      ))
+                    }
                     renderInput={(params) => (
                       <TextField
                         autoFocus
@@ -275,6 +288,7 @@ class SearchPanel extends React.Component {
 
                     )}
                   />
+                </ThemeProvider>
                   <TextField 
                     className={classes.entityNum} 
                     label={<ThemeProvider 
@@ -343,7 +357,7 @@ class SearchPanel extends React.Component {
                     onChange={this.handleRadioChange}
                   >
                     {this.state.query_candidates.map((s) => (
-                      <FormControlLabel className={classes.queryFormLabel} value={s} control={<Radio size="small"/>} label={<ThemeProvider theme={queryTypoTheme}><Typography variant="h6" noWrap className={classes.queryControlLabel}>{s}</Typography></ThemeProvider>} />
+                      <FormControlLabel className={classes.queryFormLabel} value={s} control={<Radio color="primary" size="small"/>} label={<ThemeProvider theme={queryTypoTheme}><Typography variant="h6" noWrap className={classes.queryControlLabel}>{s}</Typography></ThemeProvider>} />
                     ))}
                   </RadioGroup>
                 </FormControl>

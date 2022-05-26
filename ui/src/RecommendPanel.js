@@ -69,8 +69,8 @@ class RecommendPanel extends React.Component {
       overrides: {
           MuiTableCell: {
             stickyHeader: {  //This can be referred from Material UI API documentation. 
-                paddingTop: 2,
-                paddingBottom: 2,
+                paddingTop: 0,
+                paddingBottom: 0,
                 borderBottom: false,
                 borderTop: false,
                 paddingLeft: 0,
@@ -94,8 +94,8 @@ class RecommendPanel extends React.Component {
       overrides: {
           MuiTableCell: {
               root: {  //This can be referred from Material UI API documentation. 
-                  paddingTop: 2,
-                  paddingBottom: 2,
+                  paddingTop: 0,
+                  paddingBottom: 0,
                   paddingLeft: 0,
                   paddingRight: 0,
               },
@@ -169,7 +169,7 @@ class RecommendPanel extends React.Component {
                 Target
               </Typography> */}
               <TableContainer component={Paper} className={classes.recomTable}>
-                  <Table stickyHeader>
+                  <Table stickyHeader size="small" >
                     <ThemeProvider theme={tableHeadTheme}>
                     <TableHead >
                       <TableRow className={classes.recomTableRow}>
@@ -206,12 +206,12 @@ class RecommendPanel extends React.Component {
                               // }}
                             />
                           </TableCell>
-                          <TableCell align="left" component="th" scope="row">
+                          <TableCell align="left">
                             <Typography variant="h6">
                               {cid.Name}
                             </Typography>
                           </TableCell>
-                          <TableCell align="left" component="th" scope="row">
+                          <TableCell align="left">
                             <Typography variant="h6">
                               {cid.Type}
                             </Typography>

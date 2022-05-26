@@ -100,7 +100,7 @@ export const useStyles = (theme => ({
         minWidth:40,
     },
     recomTableNameCol: {
-        width:"auto",
+        minWidth:"calc(100%-240px)",
     },
     recomTableClusterCol : {
         minWidth:45,
@@ -138,6 +138,9 @@ export const useStyles = (theme => ({
     entityControlLabel: {
         fontSize:11,
         paddingLeft: 5,
+    },
+    autocomLabel: {
+        fontSize:11,
     },
     queryControlLabel: {
         
@@ -270,6 +273,16 @@ export const useStyles = (theme => ({
 
     },
     objectChip2: {
+        "& .MuiChip-label":{
+            paddingLeft:0,
+            paddingRight:10,
+        },
+        marginLeft:4,
+        marginBottom:4,
+        height:14,
+
+    },
+    autoChip: {
         "& .MuiChip-label":{
             paddingLeft:0,
             paddingRight:10,
