@@ -57,7 +57,9 @@ const ThemeOptions = {
       contrastText: '#fbfbfb',
     },
     warning: {
-      main: '#c96765',
+      // main: '#c96765',
+      // contrastText: '#fbfbfb',
+      main: 'rgb(44,56,87)',
       contrastText: '#fbfbfb',
     },
     background: {

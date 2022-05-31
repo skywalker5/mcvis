@@ -79,7 +79,7 @@ class RatedPanel extends React.Component {
                 borderTop: false,
                 paddingLeft: 0,
                 paddingRight: 0,
-                backgroundColor:"rgb(244,230,198)",
+                backgroundColor:"rgb(249,231,204)",
             },
           },
       },

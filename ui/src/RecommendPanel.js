@@ -75,7 +75,7 @@ class RecommendPanel extends React.Component {
                 borderTop: false,
                 paddingLeft: 0,
                 paddingRight: 0,
-                backgroundColor:"rgb(244,230,198)",
+                backgroundColor:"rgb(249,231,204)",
             },
           },
       },
@@ -120,6 +120,14 @@ class RecommendPanel extends React.Component {
         }
       },
     });
+    let objectTypoThemeUn = createMuiTheme({
+      typography: {
+        h6: {
+          color:"rgb(132,140,152)",
+          fontWeight: 700,
+        }
+      },
+    });
     const columns = [
       { field: 'Name', headerName: 'Name', flex: 0.4 },
       { field: 'Type', headerName: 'Type', flex: 0.2 }
@@ -149,7 +157,52 @@ class RecommendPanel extends React.Component {
             <Divider/>
             <FormGroup aria-label="position" row>
             <Grid container direction="row" className={classes.grid}>
-                <Chip color="primary" className={classes.objectChip} label={
+                {this.state.document? 
+                <Chip color="primary" className={classes.objectChip2} label={
+                  <FormControlLabel 
+                    className={classes.formLabel} 
+                    onChange={this.handleChange_doc} 
+                    control={ <AntSwitch checked={this.state.document} inputProps={{ 'aria-label': 'ant design' }} />} 
+                    label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
+                }/> :
+                <Chip className={classes.objectChip2Un} label={
+                  <FormControlLabel 
+                    className={classes.formLabel} 
+                    onChange={this.handleChange_doc} 
+                    control={ <AntSwitch checked={this.state.document} inputProps={{ 'aria-label': 'ant design' }} />} 
+                    label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
+                }/>}
+                {this.state.keyword? 
+                <Chip color="primary" className={classes.objectChip2} label={
+                  <FormControlLabel 
+                    className={classes.formLabel} 
+                    onChange={this.handleChange_word} 
+                    control={ <AntSwitch checked={this.state.keyword} inputProps={{ 'aria-label': 'ant design' }} />} 
+                    label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Word</Typography></ThemeProvider>} />
+                }/> :
+                <Chip className={classes.objectChip2Un} label={
+                  <FormControlLabel 
+                    className={classes.formLabel} 
+                    onChange={this.handleChange_word} 
+                    control={ <AntSwitch checked={this.state.keyword} inputProps={{ 'aria-label': 'ant design' }} />} 
+                    label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Word</Typography></ThemeProvider>} />
+                }/>}
+                {this.state.author? 
+                <Chip color="primary" className={classes.objectChip2} label={
+                  <FormControlLabel 
+                    className={classes.formLabel} 
+                    onChange={this.handleChange_auth} 
+                    control={ <AntSwitch checked={this.state.author} inputProps={{ 'aria-label': 'ant design' }} />} 
+                    label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
+                }/> :
+                <Chip className={classes.objectChip2Un} label={
+                  <FormControlLabel 
+                    className={classes.formLabel} 
+                    onChange={this.handleChange_auth} 
+                    control={ <AntSwitch checked={this.state.author} inputProps={{ 'aria-label': 'ant design' }} />} 
+                    label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
+                }/>}
+                {/* <Chip color="primary" className={classes.objectChip} label={
                 <FormControlLabel className={classes.formLabel} onChange={this.handleChange_doc} control={ <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
                 }/>
                 <Chip color="primary" className={classes.objectChip} label={
@@ -157,7 +210,7 @@ class RecommendPanel extends React.Component {
                 }/>
                 <Chip color="primary" className={classes.objectChip} label={
                 <FormControlLabel className={classes.formLabel} onChange={this.handleChange_auth} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
-                }/>
+                }/> */}
             </Grid>
             </FormGroup>
             <Divider/>

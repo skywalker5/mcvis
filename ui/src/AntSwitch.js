@@ -21,7 +21,7 @@ display: 'flex',
     color: '#fff',
     '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: 'rgb(44,56,87)',
+        backgroundColor: 'rgb(48,65,90)',
     },
     },
 },
@@ -34,7 +34,7 @@ display: 'flex',
 '& .MuiSwitch-track': {
     borderRadius: 8 / 2,
     opacity: 1,
-    backgroundColor: 'rgba(0,0,0,.25)',
+    backgroundColor: 'rgb(152,160,172)',
     boxSizing: 'border-box',
 },
 }));

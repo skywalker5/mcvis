@@ -36,7 +36,7 @@ class SearchPanel extends React.Component {
           year_selected:[2010,2016],
           queryNum: "",
           author: true, 
-          document: true, 
+          document: true,
           keyword: true,
           query_str: "",
           entityNum: ""
@@ -222,6 +222,14 @@ class SearchPanel extends React.Component {
         }
       },
     });
+    let objectTypoThemeUn = createMuiTheme({
+      typography: {
+        h6: {
+          color:"rgb(132,140,152)",
+          fontWeight: 700,
+        }
+      },
+    });
     let autocomTypoTheme = createMuiTheme({
       typography: {
         h6: {
@@ -284,6 +292,24 @@ class SearchPanel extends React.Component {
                         label= "Search..."
                         placeholder="Search..."
                         className={classes.searchTextField}
+                        InputProps={{
+                          ...params.InputProps,
+                          style: {
+                            fontSize: 14, 
+                            fontFamily: [
+                              'Museo Sans Rounded',
+                            ].join(','),
+                          } 
+                        }}
+                        InputLabelProps={{
+                          ...params.InputLabelProps,
+                          style: {
+                            fontSize: 14, 
+                            fontFamily: [
+                              'Museo Sans Rounded',
+                            ].join(','),
+                          } 
+                        }}
                       />
 
                     )}
@@ -311,15 +337,51 @@ class SearchPanel extends React.Component {
                 </ThemeProvider>
                 <FormGroup aria-label="position" row>
                   <Grid container direction="row" className={classes.grid}>
+                    {this.state.document? 
                     <Chip color="primary" className={classes.objectChip} label={
-                      <FormControlLabel className={classes.formLabel} onChange={this.handleChange_doc} control={ <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
-                    }/>
+                      <FormControlLabel 
+                        className={classes.formLabel} 
+                        onChange={this.handleChange_doc} 
+                        control={ <AntSwitch checked={this.state.document} inputProps={{ 'aria-label': 'ant design' }} />} 
+                        label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
+                    }/> :
+                    <Chip className={classes.objectChipUn} label={
+                      <FormControlLabel 
+                        className={classes.formLabel} 
+                        onChange={this.handleChange_doc} 
+                        control={ <AntSwitch checked={this.state.document} inputProps={{ 'aria-label': 'ant design' }} />} 
+                        label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
+                    }/>}
+                    {this.state.keyword? 
                     <Chip color="primary" className={classes.objectChip} label={
-                      <FormControlLabel className={classes.formLabel} onChange={this.handleChange_word} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Word</Typography></ThemeProvider>} />
-                    }/>
+                      <FormControlLabel 
+                        className={classes.formLabel} 
+                        onChange={this.handleChange_word} 
+                        control={ <AntSwitch checked={this.state.keyword} inputProps={{ 'aria-label': 'ant design' }} />} 
+                        label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Word</Typography></ThemeProvider>} />
+                    }/> :
+                    <Chip className={classes.objectChipUn} label={
+                      <FormControlLabel 
+                        className={classes.formLabel} 
+                        onChange={this.handleChange_word} 
+                        control={ <AntSwitch checked={this.state.keyword} inputProps={{ 'aria-label': 'ant design' }} />} 
+                        label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Word</Typography></ThemeProvider>} />
+                    }/>}
+                    {this.state.author? 
                     <Chip color="primary" className={classes.objectChip} label={
-                      <FormControlLabel className={classes.formLabel} onChange={this.handleChange_auth} control={<AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />} label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
-                    }/>
+                      <FormControlLabel 
+                        className={classes.formLabel} 
+                        onChange={this.handleChange_auth} 
+                        control={ <AntSwitch checked={this.state.author} inputProps={{ 'aria-label': 'ant design' }} />} 
+                        label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
+                    }/> :
+                    <Chip className={classes.objectChipUn} label={
+                      <FormControlLabel 
+                        className={classes.formLabel} 
+                        onChange={this.handleChange_auth} 
+                        control={ <AntSwitch checked={this.state.author} inputProps={{ 'aria-label': 'ant design' }} />} 
+                        label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
+                    }/>}
                   </Grid>
                 </FormGroup>
               </Grid>
