@@ -245,6 +245,12 @@ class SearchPanel extends React.Component {
       },
     });
     let searchButtonTheme = createMuiTheme({
+      palette: {
+        primary: {
+          main: 'rgb(255,127,80)',
+          contrastText: '#fbfbfb',
+        },
+      },
       typography: {
         h6: {
           fontSize:11,
@@ -265,7 +271,7 @@ class SearchPanel extends React.Component {
                 </Typography>
                 </ThemeProvider>
               </Grid>
-              <Divider/>
+              {/* <Divider/> */}
               <Grid item spacing={0}>
                 <Grid container direction="row" className={classes.searchGrid} spacing={0}>
                 <ThemeProvider theme={autocomTypoTheme}>
@@ -426,7 +432,9 @@ class SearchPanel extends React.Component {
               </Paper>
               <Grid direction="row" className={classes.searchButtonGrid}>
               <div className={classes.grow}/>
-                <Button className={classes.searchButton} type="submit" variant="contained" color = "primary"><SearchIcon className={classes.ssIcon}/><ThemeProvider theme={searchButtonTheme}><Typography variant="h6">search</Typography></ThemeProvider></Button>
+                <ThemeProvider theme={searchButtonTheme}>
+                  <Button className={classes.searchButton} type="submit" variant="contained" color="primary"><SearchIcon className={classes.ssIcon}/><Typography variant="h6">search</Typography></Button>
+                </ThemeProvider>
                 </Grid>
             </Grid>
           </form>

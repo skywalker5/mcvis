@@ -154,7 +154,7 @@ class RecommendPanel extends React.Component {
               Recommendations
             </Typography>
             </ThemeProvider>
-            <Divider/>
+            {/* <Divider/> */}
             <FormGroup aria-label="position" row>
             <Grid container direction="row" className={classes.grid}>
                 {this.state.document? 
@@ -213,7 +213,7 @@ class RecommendPanel extends React.Component {
                 }/> */}
             </Grid>
             </FormGroup>
-            <Divider/>
+            {/* <Divider/> */}
             {/* <Grid container direction="row" className={classes.pairSearchGrid} spacing={0}> */}
               {/* <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
                 Source

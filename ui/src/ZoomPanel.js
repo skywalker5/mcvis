@@ -9,6 +9,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import AntSwitch from './AntSwitch';
 import Slider from '@material-ui/core/Slider';
+import CircleTwoToneIcon from '@mui/icons-material/CircleTwoTone';
+import SquareTwoToneIcon from '@mui/icons-material/SquareTwoTone';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import axios from 'axios';
 import api from './api';
@@ -156,7 +158,7 @@ class ZoomPanel extends React.Component {
                             <Slider defaultValue={0.7} step={0.05} min={0} max={1} valueLabelDisplay="auto" onChange={this.handleChange}/>
                           </Box>
                           <ThemeProvider theme={tsneTheme}>
-                            <Typography variant="h6" id="tableTitle" className={classes.zoomTitle1}>
+                            <Typography variant="h6" className={classes.zoomTitle1}>
                                 {this.state.gamma}
                             </Typography>
                           </ThemeProvider>
@@ -182,7 +184,8 @@ class ZoomPanel extends React.Component {
 
                     </Stack>
 
-                    <Divider/>
+                    {/* <Divider/> */}
+                    <Stack direction="row" className={classes.zoomLegendStack}>
                     <FormGroup aria-label="position" row>
                     <Grid direction="column" className={classes.grid}>
                         {this.state.document? 
@@ -232,6 +235,17 @@ class ZoomPanel extends React.Component {
                         }/>}
                     </Grid>
                     </FormGroup>
+                      <ThemeProvider theme={tsneTheme}>
+                      <Typography noWrap variant="h6" className={classes.zoomLegend}>
+                        <CircleTwoToneIcon className={classes.circleIcon}/>
+                        {"Document"}
+                        <SquareTwoToneIcon className={classes.squareIcon}/>
+                        {"Word"}
+                        <SquareTwoToneIcon className={classes.diaIcon} />
+                        {"Author"}
+                      </Typography>
+                      </ThemeProvider>
+                    </Stack>
                     <ZoomChart data={this.props.dpoints} cluster_list={this.props.cluster_list} click={this.props.click}
                         search_select_list={this.props.search_select_list}
                         current_clicked = {this.props.current_clicked}

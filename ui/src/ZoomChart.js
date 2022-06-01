@@ -128,7 +128,7 @@ export const ZoomChart = (props) => {
   
   const in_stroke="black";
   return (
-    <Paper style={{display:"flex", flex:1}} ref={containerRef} >
+    <Paper elevation={0} style={{display:"flex", flex:1}} ref={containerRef} >
         <div style={{flex:1}}>
             <svg width="100%" height="100%">
                 <g>

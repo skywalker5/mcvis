@@ -22,6 +22,22 @@ export const useStyles = (theme => ({
         transformOrigin: "center",
         transform:"rotate(45deg)"
     },
+    circleIcon:{
+        marginRight: theme.spacing(-0.5),
+        transform:"scale(0.6)"
+    },
+    squareIcon:{
+        marginLeft: theme.spacing(0.5),
+        marginRight: theme.spacing(-0.5),
+        transform:"scale(0.6)"
+    },
+    diaIcon:{
+        marginLeft: theme.spacing(0.5),
+        marginRight: theme.spacing(-0.3),
+        transformBox: "fill-box",
+        transformOrigin: "center",
+        transform:"rotate(45deg) scale(0.55)",
+    },
     diaSelected:{
         transformBox: "fill-box",
         transformOrigin: "center",
@@ -100,13 +116,16 @@ export const useStyles = (theme => ({
         minWidth:40,
     },
     recomTableNameCol: {
-        minWidth:"calc(100%-240px)",
+        // minWidth:"calc(100%-240px)",
     },
     recomTableClusterCol : {
         minWidth:45,
     },
     recomTableRatingCol : {
         minWidth:80,
+    },
+    detailPholder:{
+        minWidth:60,
     },
     detailTableCluCol: {
         minWidth:45,
@@ -186,6 +205,17 @@ export const useStyles = (theme => ({
         marginRight: "25px",
         marginBottom: "-5px"
     },
+    zoomLegend: {
+        display: "flex",
+        alignItems: "center",
+        marginRight: theme.spacing(1),
+    },
+    clusterCell: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent:"flex-end",
+        minWidth:theme.spacing(5),
+    },
     zoomTitle1: {
         
     },
@@ -217,6 +247,11 @@ export const useStyles = (theme => ({
         alignItems: "center",
     },
     zoomStack: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    zoomLegendStack: {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",

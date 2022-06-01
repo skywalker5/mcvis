@@ -165,10 +165,10 @@ class ClusterDetailsPanel extends React.Component {
             </TableCell>
             <TableCell className={classes.detailTableCluCol} align="left">
             <Grid container direction="row" className={classes.grid}>
-              <Typography variant="h6">
+              <Typography noWrap variant="h6" className={classes.clusterCell}>
                 {cid}
+                <SquareRoundedIcon className={classes.sqIcon} sx={{ color: interpolateTurbo(cid/20.0) }}/>
               </Typography>
-              <SquareRoundedIcon className={classes.sqIcon} sx={{ color: interpolateTurbo(cid/20.0) }}/>
             </Grid>
             </TableCell>
             <TableCell className={classes.recomTableRatingCol} >

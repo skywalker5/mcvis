@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
         width:'100%',
         justifyContent: 'center',
         alignItems: 'center',
-        background:theme.palette.primary.main,
+        background:theme.palette.secondary.main,
         minHeight:theme.spacing(3),
     },
 }));
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 function Footer(props) {
     const classes = useStyles();
     return (
-        <Toolbar variant="dense" className={classes.footer} color={'primary'}>
+        <Toolbar variant="dense" className={classes.footer}>
         </Toolbar>
     );
 }

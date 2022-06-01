@@ -65,7 +65,7 @@ class EmbeddingPanel extends React.Component {
                         </Select>
                         </FormControl> */}
                     </Grid>
-            <Divider/>
+            {/* <Divider/> */}
                     <ScatterChart data={this.props.dpoints} 
                         inclusters = {this.props.inclusters}
                         outclusters = {this.props.outclusters}

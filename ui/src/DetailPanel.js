@@ -88,6 +88,24 @@ class DetailPanel extends React.Component {
         }
       },
     });
+    const qdata = [
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":1,"id":22451},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":2,"id":2241},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":3,"id":22451},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":11,"id":22451},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":11,"id":22451},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":11,"id":22451},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
+      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
+
+    ];
     function Row(props) {
       const { row, onClick } = props;
       const [open, setOpen] = React.useState(false);
@@ -127,9 +145,10 @@ class DetailPanel extends React.Component {
             <TableCell className={classes.recomTableNameCol}><Typography variant="h6">{row.Name}</Typography></TableCell>
             <TableCell className={classes.recomTableClusterCol} >
               <Grid container direction="row" className={classes.grid}>
-                <Typography variant="h5">{row.cid}
+                <Typography noWrap variant="h5" className={classes.clusterCell}>
+                  {row.cid}
+                  <SquareRoundedIcon className={classes.sqIcon} sx={{ color: interpolateTurbo(row.cid/20.0) }}/>
                 </Typography>
-                <SquareRoundedIcon className={classes.sqIcon} sx={{ color: interpolateTurbo(row.cid/20.0) }}/>
               </Grid>
             </TableCell>
             <TableCell className={classes.recomTableRatingCol} >
@@ -140,46 +159,51 @@ class DetailPanel extends React.Component {
           <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1 }}>
+                <Box>
                   {/* <Typography variant="h6" gutterBottom component="div">
                     Entity Details
                   </Typography> */}
                   {row.Type === "Doc" ?
-                  (<Table size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Authors</TableCell>
-                        <TableCell>Venue</TableCell>
-                        <TableCell>Top Keywords</TableCell>
-                        <TableCell>Cited</TableCell>
-                        <TableCell>Cited By</TableCell>
-                        <TableCell>Rating</TableCell>
-                      </TableRow>
-                    </TableHead>
+                  (<Table>
+                    {/* <TableHead>
+                    </TableHead> */}
                     <TableBody>
-                    <TableCell>{row.Authors.join(", ")}</TableCell>
-                    <TableCell>{row.Venue}</TableCell>
-                    <TableCell>{row['Top Keywords'].join(", ")}</TableCell>
-                    <TableCell>{row['Cited'].join(", ")}</TableCell>
+                    <TableRow>
+                      <TableCell rowSpan={3} className={classes.detailPholder} >
+                        
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell><Typography variant="h6">Authors</Typography></TableCell>
+                      <TableCell>Venue</TableCell>
+                      <TableCell>Top Keywords</TableCell>
+                      {/* <TableCell>Cited</TableCell>
+                      <TableCell>Cited By</TableCell>
+                      <TableCell>Rating</TableCell> */}
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>{row.Authors.join(", ")}</TableCell>
+                      <TableCell>{row.Venue}</TableCell>
+                      <TableCell>{row['Top Keywords'].join(", ")}</TableCell>
+                    </TableRow>
+                    {/* <TableCell>{row['Cited'].join(", ")}</TableCell>
                     <TableCell>{row['Cited By'].join(", ")}</TableCell>
                     <TableCell>
                       <Rating name="rating" defaultValue= {defaultval} onChange={handleChange_rate} precision={0.5} />
-                      {/* <Rating name="rating" defaultValue= {2.5} precision={0.5} />  */}
-                    </TableCell>
+                    </TableCell> */}
                     </TableBody>
                   </Table>):(row.Type === "Word" ? (<Table size="small">
                     <TableHead>
                       <TableRow>
                         <TableCell>Synonyms</TableCell>
-                        <TableCell>Rating</TableCell>
+                        {/* <TableCell>Rating</TableCell> */}
                       </TableRow>
                     </TableHead>
                     <TableBody>
                     <TableCell>{row["Synonyms"].join(", ")}</TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       <Rating name="rating" defaultValue= {defaultval} onChange={handleChange_rate} precision={0.5} />
-                      {/* <Rating name="rating" defaultValue= {2.5} precision={0.5} />  */}
-                    </TableCell>
+                    </TableCell> */}
                     </TableBody>
                   </Table>): (<Table size="small">
                     <TableHead>
@@ -187,17 +211,16 @@ class DetailPanel extends React.Component {
                         <TableCell>Papers</TableCell>
                         <TableCell>Co-authors</TableCell>
                         <TableCell>Top Keywords</TableCell>
-                        <TableCell>Rating</TableCell>
+                        {/* <TableCell>Rating</TableCell> */}
                       </TableRow>
                     </TableHead>
                     <TableBody>
                     <TableCell>{row["Papers"].join(", ")}</TableCell>
                     <TableCell>{row["Co-authors"].join(", ")}</TableCell>
                     <TableCell>{row["Top Keywords"].join(", ")}</TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       <Rating name="rating" defaultValue= {defaultval} onChange={handleChange_rate} precision={0.5} />
-                      {/* <Rating name="rating" defaultValue= {2.5} precision={0.5} />  */}
-                    </TableCell>
+                    </TableCell> */}
                     </TableBody>
                   </Table>))}
                 </Box>
@@ -250,12 +273,12 @@ class DetailPanel extends React.Component {
               </ThemeProvider>
               <ThemeProvider theme={tableBodyTheme}>
               <TableBody>
-                {Object.keys(this.props.query_data).map((index) => (
+                {/* {Object.keys(this.props.query_data).map((index) => (
                   <Row key={index} row={this.props.query_data[index]} entity_clicked={this.props.entity_clicked}/>
-                ))}
-                {/* {Object.keys(aa).map((index) => (
-                  <Row key={index} row={aa[index]} entity_clicked={this.props.entity_clicked}/>
                 ))} */}
+                {Object.keys(qdata).map((index) => (
+                  <Row key={index} row={qdata[index]} entity_clicked={this.props.entity_clicked}/>
+                ))}
               </TableBody>
               </ThemeProvider>
             </Table>

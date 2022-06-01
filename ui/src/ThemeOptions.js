@@ -56,10 +56,14 @@ const ThemeOptions = {
       main: 'rgb(44,56,87)',
       contrastText: '#fbfbfb',
     },
+    success: {
+      main: 'rgb(255,127,80)',
+      contrastText: '#fbfbfb',
+    },
     warning: {
       // main: '#c96765',
       // contrastText: '#fbfbfb',
-      main: 'rgb(44,56,87)',
+      main: 'rgb(255,127,80)',
       contrastText: '#fbfbfb',
     },
     background: {

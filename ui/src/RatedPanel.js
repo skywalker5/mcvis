@@ -62,6 +62,12 @@ class RatedPanel extends React.Component {
       },
     });
     let rateTypoTheme = createMuiTheme({
+      palette: {
+        primary: {
+          main: 'rgb(255,127,80)',
+          contrastText: '#fbfbfb',
+        },
+      },
       typography: {
         h6: {
           fontSize:11,
@@ -119,11 +125,13 @@ class RatedPanel extends React.Component {
                 </Typography>
                 </ThemeProvider>
                 <div className={classes.grow}/>
+                <ThemeProvider theme={rateTypoTheme}>
                 <Button className={classes.submitButton} type="submit" variant="contained" color = "primary">
                   {/* <EnterOutline height="15px" color={'white'}/> */}
                   <ExitToAppIcon className={classes.submitIcon}/>
-                  <ThemeProvider theme={rateTypoTheme}><Typography variant="h6">Submit</Typography></ThemeProvider>
+                  <Typography variant="h6">Submit</Typography>
                 </Button>
+                </ThemeProvider>
               </Grid>
             </Grid>
             {/* <Divider/> */}
