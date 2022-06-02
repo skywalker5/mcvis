@@ -115,6 +115,9 @@ export const useStyles = (theme => ({
     recomTableTypeCol: {
         minWidth:40,
     },
+    detailTableTypeCol: {
+        minWidth:55,
+    },
     recomTableNameCol: {
         // minWidth:"calc(100%-240px)",
     },
@@ -125,7 +128,13 @@ export const useStyles = (theme => ({
         minWidth:80,
     },
     detailPholder:{
-        minWidth:60,
+        width:40,
+    },
+    detailPaperCol:{
+        width:50,
+    },
+    cDetailPholder:{
+        width:30,
     },
     detailTableCluCol: {
         minWidth:45,

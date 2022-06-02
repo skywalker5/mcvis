@@ -119,35 +119,35 @@ class ZoomPanel extends React.Component {
             <Paper className={classes.zoomPaper}>
                 <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
                     <Stack direction="row" className={classes.zoomStack} spacing={0}>
-                        <ThemeProvider theme={titleTheme}>
-                          <Typography className={classes.zoomStackTypo} noWrap>
-                            <Typography variant="h5" id="tableTitle" className={classes.zoomTitle1}>
-                                {"Zoom Panel"}
-                            </Typography>
-                            <Typography variant="h6" id="tableTitle" className={classes.zoomTitle2}>
-                                {"("}
-                            </Typography>
-                            <Typography variant="h5" id="tableTitle" className={classes.zoomTitle1}>
-                                {this.props.doc_num}
-                            </Typography>
-                            <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
-                                {"Documents"+", "}
-                            </Typography>
-                            <Typography variant="h5" id="tableTitle" className={classes.zoomTitle3}>
-                                {this.props.word_num}
-                            </Typography>
-                            <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
-                                {"Words, "}
-                            </Typography>
-                            <Typography variant="h5" id="tableTitle" className={classes.zoomTitle3}>
-                                {this.props.auth_num}
-                            </Typography>
-                            <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
-                                {"Authors)"}
-                            </Typography>
+                      <ThemeProvider theme={titleTheme}>
+                        <Typography className={classes.zoomStackTypo} noWrap>
+                          <Typography variant="h5" id="tableTitle" className={classes.zoomTitle1}>
+                              {"Zoom Panel"}
                           </Typography>
-                        </ThemeProvider>
-                        <Stack direction="column" className={classes.zoomSliderStack} spacing={0}>
+                          <Typography variant="h6" id="tableTitle" className={classes.zoomTitle2}>
+                              {"("}
+                          </Typography>
+                          <Typography variant="h5" id="tableTitle" className={classes.zoomTitle1}>
+                              {this.props.doc_num}
+                          </Typography>
+                          <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
+                              {"Documents"+", "}
+                          </Typography>
+                          <Typography variant="h5" id="tableTitle" className={classes.zoomTitle3}>
+                              {this.props.word_num}
+                          </Typography>
+                          <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
+                              {"Words, "}
+                          </Typography>
+                          <Typography variant="h5" id="tableTitle" className={classes.zoomTitle3}>
+                              {this.props.auth_num}
+                          </Typography>
+                          <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
+                              {"Authors)"}
+                          </Typography>
+                        </Typography>
+                      </ThemeProvider>
+                      <Stack direction="column" className={classes.zoomSliderStack} spacing={0}>
                         <ThemeProvider theme={tsneTheme}>
                         <Typography noWrap variant="h6" id="tableTitle" className={classes.zoomTsneTitle}>
                             {"T-SNE Shrinkage"}
@@ -163,24 +163,24 @@ class ZoomPanel extends React.Component {
                             </Typography>
                           </ThemeProvider>
                         </Stack>
-                        </Stack>
-                        {/* <Grid container direction="row" className={classes.zoomTsne}>
-                            <Grid container direction="column" className={classes.zoomTsne}>
-                            <ThemeProvider theme={tsneTheme}>
-                            <Typography noWrap variant="h6" id="tableTitle" className={classes.zoomTitle1}>
-                                {"T-SNE Shrinkage"}
+                      </Stack>
+                    {/* <Grid container direction="row" className={classes.zoomTsne}>
+                        <Grid container direction="column" className={classes.zoomTsne}>
+                        <ThemeProvider theme={tsneTheme}>
+                        <Typography noWrap variant="h6" id="tableTitle" className={classes.zoomTitle1}>
+                            {"T-SNE Shrinkage"}
+                        </Typography>
+                        </ThemeProvider>
+                        <Grid container direction="row" className={classes.zoomSlider} noWrap>
+                        <Slider defaultValue={0.7} step={0.05} min={0} max={1} valueLabelDisplay="auto" onChange={this.handleChange}/>
+                          <ThemeProvider theme={tsneTheme}>
+                            <Typography variant="h6" id="tableTitle" className={classes.zoomTitle1}>
+                                {this.state.gamma}
                             </Typography>
-                            </ThemeProvider>
-                            <Grid container direction="row" className={classes.zoomSlider} noWrap>
-                            <Slider defaultValue={0.7} step={0.05} min={0} max={1} valueLabelDisplay="auto" onChange={this.handleChange}/>
-                              <ThemeProvider theme={tsneTheme}>
-                                <Typography variant="h6" id="tableTitle" className={classes.zoomTitle1}>
-                                    {this.state.gamma}
-                                </Typography>
-                              </ThemeProvider>
-                            </Grid>
-                            </Grid>
-                        </Grid> */}
+                          </ThemeProvider>
+                        </Grid>
+                        </Grid>
+                    </Grid> */}
 
                     </Stack>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Paper, Divider, Table, TableBody, TableCell, TableRow} from '@material-ui/core';
 import {TableContainer, TableHead} from '@material-ui/core';
-import {Grid, List, Box} from '@material-ui/core';
+import {Grid, Box} from '@material-ui/core';
 import {Collapse, IconButton, Typography} from '@material-ui/core';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -82,9 +82,9 @@ class DetailPanel extends React.Component {
           fontFamily: [
             'Museo Sans Rounded',
           ].join(','),
-          fontSize: 13,
-          fontWeight: 400,
-          lineHeight:"inherit",
+          fontSize: 12,
+          fontWeight: 600,
+          lineHeight:1.2,
         }
       },
     });
@@ -92,6 +92,10 @@ class DetailPanel extends React.Component {
       {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":1,"id":22451},
       {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":2,"id":2241},
       {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
+      {"Co-authors":["Rémi Douence","Jean-Marc Menaud","M. Südholt","Fabien Hermenier"],"Name":"Luis Daniel Benavides Navarro","Papers":[2327],"Top Keywords":["grid","invas","pattern","checkpoint","topolog","wellknown","na","hamper","legaci","instanti"],"Type":"Author","cid":11,"id":2955},
+      {"Co-authors":["Jorge M. Santos","Chetak Kandaswamy","Joaquim Marques de Sá"],"Name":"Luís A. Alexandre","Papers":[11344],"Top Keywords":["deep","cost","finetun","supervis","reconstruct","layer","network","train","function","hidden"],"Type":"Author","cid":15,"id":2956},
+      {"Name":"cmac","Synonyms":["lyapunov","chatter","servo","timedelay","control","tank","closedloop","pid","torqu","reactor"],"Type":"Word","cid":16,"id":39456},
+      {"Name":"oil","Synonyms":["featur","select","cepstral","irrelev","abrupt","selector","roc","prerequisit","steel","mutual"],"Type":"Word","cid":6,"id":39478},
       {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":3,"id":22451},
       {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
       {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
@@ -145,7 +149,7 @@ class DetailPanel extends React.Component {
             <TableCell className={classes.recomTableNameCol}><Typography variant="h6">{row.Name}</Typography></TableCell>
             <TableCell className={classes.recomTableClusterCol} >
               <Grid container direction="row" className={classes.grid}>
-                <Typography noWrap variant="h5" className={classes.clusterCell}>
+                <Typography noWrap variant="h6" className={classes.clusterCell}>
                   {row.cid}
                   <SquareRoundedIcon className={classes.sqIcon} sx={{ color: interpolateTurbo(row.cid/20.0) }}/>
                 </Typography>
@@ -165,26 +169,22 @@ class DetailPanel extends React.Component {
                   </Typography> */}
                   {row.Type === "Doc" ?
                   (<Table>
-                    {/* <TableHead>
-                    </TableHead> */}
                     <TableBody>
                     <TableRow>
-                      <TableCell rowSpan={3} className={classes.detailPholder} >
-                        
-                      </TableCell>
+                      <TableCell rowSpan={3} className={classes.detailPholder} />
                     </TableRow>
                     <TableRow>
-                      <TableCell><Typography variant="h6">Authors</Typography></TableCell>
-                      <TableCell>Venue</TableCell>
-                      <TableCell>Top Keywords</TableCell>
+                      <TableCell><Typography variant="h5">Authors</Typography></TableCell>
+                      <TableCell><Typography variant="h5">Venue</Typography></TableCell>
+                      <TableCell><Typography variant="h5">Top Keywords</Typography></TableCell>
                       {/* <TableCell>Cited</TableCell>
                       <TableCell>Cited By</TableCell>
                       <TableCell>Rating</TableCell> */}
                     </TableRow>
                     <TableRow>
-                      <TableCell>{row.Authors.join(", ")}</TableCell>
-                      <TableCell>{row.Venue}</TableCell>
-                      <TableCell>{row['Top Keywords'].join(", ")}</TableCell>
+                      <TableCell><Typography variant="h6">{row.Authors.join(", ")}</Typography></TableCell>
+                      <TableCell><Typography variant="h6">{row.Venue}</Typography></TableCell>
+                      <TableCell><Typography variant="h6">{row['Top Keywords'].join(", ")}</Typography></TableCell>
                     </TableRow>
                     {/* <TableCell>{row['Cited'].join(", ")}</TableCell>
                     <TableCell>{row['Cited By'].join(", ")}</TableCell>
@@ -192,32 +192,38 @@ class DetailPanel extends React.Component {
                       <Rating name="rating" defaultValue= {defaultval} onChange={handleChange_rate} precision={0.5} />
                     </TableCell> */}
                     </TableBody>
-                  </Table>):(row.Type === "Word" ? (<Table size="small">
-                    <TableHead>
+                  </Table>):(row.Type === "Word" ? (<Table>
+                    <TableBody>
                       <TableRow>
-                        <TableCell>Synonyms</TableCell>
+                        <TableCell rowSpan={3} className={classes.detailPholder} />
+                      </TableRow>
+                      <TableRow>
+                        <TableCell><Typography variant="h5">Synonyms</Typography></TableCell>
                         {/* <TableCell>Rating</TableCell> */}
                       </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    <TableCell>{row["Synonyms"].join(", ")}</TableCell>
-                    {/* <TableCell>
-                      <Rating name="rating" defaultValue= {defaultval} onChange={handleChange_rate} precision={0.5} />
-                    </TableCell> */}
+                      <TableRow>
+                        <TableCell><Typography variant="h6">{row["Synonyms"].join(", ")}</Typography></TableCell>
+                      </TableRow>
+                      {/* <TableCell>
+                        <Rating name="rating" defaultValue= {defaultval} onChange={handleChange_rate} precision={0.5} />
+                      </TableCell> */}
                     </TableBody>
-                  </Table>): (<Table size="small">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Papers</TableCell>
-                        <TableCell>Co-authors</TableCell>
-                        <TableCell>Top Keywords</TableCell>
-                        {/* <TableCell>Rating</TableCell> */}
-                      </TableRow>
-                    </TableHead>
+                  </Table>): (<Table>
                     <TableBody>
-                    <TableCell>{row["Papers"].join(", ")}</TableCell>
-                    <TableCell>{row["Co-authors"].join(", ")}</TableCell>
-                    <TableCell>{row["Top Keywords"].join(", ")}</TableCell>
+                      <TableRow>
+                        <TableCell rowSpan={3} className={classes.detailPholder} />
+                      </TableRow>
+                    <TableRow>
+                      <TableCell className={classes.detailPaperCol}><Typography variant="h5">Papers</Typography></TableCell>
+                      <TableCell><Typography variant="h5">Co-authors</Typography></TableCell>
+                      <TableCell><Typography variant="h5">Top Keywords</Typography></TableCell>
+                      {/* <TableCell>Rating</TableCell> */}
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className={classes.detailPaperCol}><Typography variant="h6">{row["Papers"].join(", ")}</Typography></TableCell>
+                      <TableCell><Typography variant="h6">{row["Co-authors"].join(", ")}</Typography></TableCell>
+                      <TableCell><Typography variant="h6">{row["Top Keywords"].join(", ")}</Typography></TableCell>
+                    </TableRow>
                     {/* <TableCell>
                       <Rating name="rating" defaultValue= {defaultval} onChange={handleChange_rate} precision={0.5} />
                     </TableCell> */}

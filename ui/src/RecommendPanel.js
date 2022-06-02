@@ -69,8 +69,8 @@ class RecommendPanel extends React.Component {
       overrides: {
           MuiTableCell: {
             stickyHeader: {  //This can be referred from Material UI API documentation. 
-                paddingTop: 0,
-                paddingBottom: 0,
+                paddingTop: 2,
+                paddingBottom: 2,
                 borderBottom: false,
                 borderTop: false,
                 paddingLeft: 0,
@@ -222,7 +222,7 @@ class RecommendPanel extends React.Component {
                 Target
               </Typography> */}
               <TableContainer component={Paper} className={classes.recomTable}>
-                  <Table stickyHeader size="small" >
+                  <Table stickyHeader size="small">
                     <ThemeProvider theme={tableHeadTheme}>
                     <TableHead >
                       <TableRow className={classes.recomTableRow}>

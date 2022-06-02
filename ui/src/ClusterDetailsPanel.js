@@ -137,15 +137,20 @@ class ClusterDetailsPanel extends React.Component {
           fontSize: 13,
           fontWeight: 400,
           lineHeight:1.2,
+        },
+        h5: {
+          fontFamily: [
+            'Museo Sans Rounded',
+          ].join(','),
+          fontSize: 12,
+          fontWeight: 600,
+          lineHeight:1.2,
         }
       },
     });
     function Row(props) {
-      const { cid, data, zoom_in_clusters, zoom_dict } = props;
+      const { cid, data } = props;
       const [open, setOpen] = React.useState(false);
-      const top_10_entities = [
-        
-      ];
       return (
         <React.Fragment>
           <TableRow id={cid} sx={{ '& > *': { borderBottom: 'unset' } }}> 
@@ -160,7 +165,7 @@ class ClusterDetailsPanel extends React.Component {
             </TableCell>
             <TableCell align="left" component="th" scope="row">
               <Typography variant="h6">
-                {cid}
+                {data["Keywords"].join(", ")}
               </Typography>
             </TableCell>
             <TableCell className={classes.detailTableCluCol} align="left">
@@ -180,10 +185,24 @@ class ClusterDetailsPanel extends React.Component {
           <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <Box sx={{ margin: 1 }}>
-                  <Typography variant="h6" gutterBottom component="div">
-                    Top 10 Entities
-                  </Typography>
+                <Box>
+                  <Table>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell rowSpan={data["Top Objects"].length+2} className={classes.cDetailPholder} />
+                      </TableRow>
+                      <TableRow>
+                        <TableCell><Typography variant="h5">Top Objects</Typography></TableCell>
+                        <TableCell className={classes.detailTableTypeCol} align="left"><Typography variant="h5">Type</Typography></TableCell>
+                      </TableRow>
+                      {data["Top Objects"].map((ob) => (
+                        <TableRow>
+                          <TableCell><Typography variant="h6">{ob[0]}</Typography></TableCell>
+                          <TableCell className={classes.detailTableTypeCol} align="left"><Typography variant="h6">{ob[1]}</Typography></TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
                 </Box>
               </Collapse>
             </TableCell>
@@ -196,6 +215,41 @@ class ClusterDetailsPanel extends React.Component {
     const cluster_ids = [
       0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
     ];
+    const cdata = [
+      {
+        "Top Objects":[
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
+        ],
+        "Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],
+        "cid":1,
+      },
+      {
+        "Top Objects":[
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
+        ],
+        "Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],
+        "cid":2,
+      },
+      {
+        "Top Objects":[
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
+          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
+        ],
+        "Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],
+        "cid":3,
+      },
+    ]
 
     const {classes} = this.props;
     
@@ -203,36 +257,42 @@ class ClusterDetailsPanel extends React.Component {
         <Paper className={classes.historyPaper}>
           <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
             <ThemeProvider theme={titleTheme}>
-            <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
-              Cluster Details
-            </Typography>
+              <Typography variant="h6" id="tableTitle" className={classes.panelTitle}>
+                Cluster Details
+              </Typography>
             </ThemeProvider>
-              <TableContainer component={Paper} className={classes.recomTable}>
-                  <Table stickyHeader>
-                    <ThemeProvider theme={tableHeadTheme}>
-                    <TableHead >
-                      <TableRow className={classes.recomTableRow}>
-                        <TableCell padding="checkbox" className={classes.recomTableArrowCol} />
-                        <TableCell align="left"><Typography variant="h6">Keywords</Typography></TableCell>
-                        <TableCell className={classes.detailTableCluCol} align="left"><Typography variant="h6">Cluster</Typography></TableCell>
-                        <TableCell className={classes.recomTableRatingCol} align="left"><Typography variant="h6">Rating</Typography></TableCell>
-                      </TableRow>
-                    </TableHead>
-                    </ThemeProvider>
-                    <ThemeProvider theme={tableBodyTheme}>
-                    <TableBody>
-                      {cluster_ids.map((cid) => (
-                        <Row
-                          cid={cid} 
-                          data={this.props.data}
-                          zoom_in_clusters={this.props.zoom_in_clusters}
-                          zoom_dict = {this.props.zoom_dict}
-                        />
-                      ))}
-                    </TableBody>
-                    </ThemeProvider>
-                  </Table>
-              </TableContainer>
+            <TableContainer component={Paper} className={classes.recomTable}>
+                <Table stickyHeader>
+                  <ThemeProvider theme={tableHeadTheme}>
+                  <TableHead >
+                    <TableRow className={classes.recomTableRow}>
+                      <TableCell padding="checkbox" className={classes.recomTableArrowCol} />
+                      <TableCell align="left"><Typography variant="h6">Keywords</Typography></TableCell>
+                      <TableCell className={classes.detailTableCluCol} align="left"><Typography variant="h6">Cluster</Typography></TableCell>
+                      <TableCell className={classes.recomTableRatingCol} align="left"><Typography variant="h6">Rating</Typography></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  </ThemeProvider>
+                  <ThemeProvider theme={tableBodyTheme}>
+                  <TableBody>
+                    {/* {cluster_ids.map((cid) => (
+                      <Row
+                        cid={cid} 
+                        data={this.props.data}
+                        zoom_in_clusters={this.props.zoom_in_clusters}
+                        zoom_dict = {this.props.zoom_dict}
+                      />
+                    ))} */}
+                    {cdata.map((cd) => (
+                      <Row
+                        cid={cd.cid} 
+                        data={cd}
+                      />
+                    ))}
+                  </TableBody>
+                  </ThemeProvider>
+                </Table>
+            </TableContainer>
           </Grid>
         </Paper>
       )
