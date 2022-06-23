@@ -35,10 +35,11 @@ export const ScatterChart = (props) => {
   const out_stroke=null;
   const in_stroke_width=0.5;
   const out_stroke_width=1;
+  const { classes } = props;
 
   return (
-        <Paper elevation={0} style={{display:"flex", flex:1}} ref={containerRef}>
-            <div style={{flex:1}}>
+        <Paper variant="outlined" elevation={0} ref={containerRef} className={classes.embeddingChart} >
+            <div style={{flex:1, height:"100%"}}>
                 <svg width="100%" height="100%">
                     <g>
                         {Object.keys(props.outclusters).map((index) => (

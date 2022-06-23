@@ -65,12 +65,32 @@ const NavigationBar = (props)=> {
           <Typography className={props.classes.datasetTypo} noWrap>
           <ThemeProvider theme={featTheme}>
           <Typography variant="h6" noWrap>
-            NONZEROS
+            Documents
           </Typography>
           </ThemeProvider>
           <ThemeProvider theme={nameTheme}>
           <Typography className={props.classes.nameTypo} variant="h6" noWrap>
-          | 16,592,039
+          | 11,568
+          </Typography>
+          </ThemeProvider>
+          <ThemeProvider theme={featTheme}>
+          <Typography variant="h6" noWrap>
+            Words
+          </Typography>
+          </ThemeProvider>
+          <ThemeProvider theme={nameTheme}>
+          <Typography className={props.classes.nameTypo} variant="h6" noWrap>
+          | 6,327
+          </Typography>
+          </ThemeProvider>
+          <ThemeProvider theme={featTheme}>
+          <Typography variant="h6" noWrap>
+            Authors
+          </Typography>
+          </ThemeProvider>
+          <ThemeProvider theme={nameTheme}>
+          <Typography className={props.classes.nameTypo} variant="h6" noWrap>
+          | 5,000
           </Typography>
           </ThemeProvider>
           </Typography>

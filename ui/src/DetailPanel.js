@@ -279,12 +279,12 @@ class DetailPanel extends React.Component {
               </ThemeProvider>
               <ThemeProvider theme={tableBodyTheme}>
               <TableBody>
-                {/* {Object.keys(this.props.query_data).map((index) => (
+                {Object.keys(this.props.query_data).map((index) => (
                   <Row key={index} row={this.props.query_data[index]} entity_clicked={this.props.entity_clicked}/>
-                ))} */}
-                {Object.keys(qdata).map((index) => (
-                  <Row key={index} row={qdata[index]} entity_clicked={this.props.entity_clicked}/>
                 ))}
+                {/* {Object.keys(qdata).map((index) => (
+                  <Row key={index} row={qdata[index]} entity_clicked={this.props.entity_clicked}/>
+                ))} */}
               </TableBody>
               </ThemeProvider>
             </Table>

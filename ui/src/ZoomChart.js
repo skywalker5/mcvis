@@ -127,8 +127,9 @@ export const ZoomChart = (props) => {
   }, [props.data.length]);
   
   const in_stroke="black";
+  const { classes } = props;
   return (
-    <Paper elevation={0} style={{display:"flex", flex:1}} ref={containerRef} >
+    <Paper variant="outlined" elevation={0} style={{display:"flex", flex:1, }} ref={containerRef} className={classes.zoomChart} >
         <div style={{flex:1}}>
             <svg width="100%" height="100%">
                 <g>

@@ -2,6 +2,7 @@ import React from 'react';
 import {Paper, Divider} from '@material-ui/core';
 import ZoomChart from './ZoomChart'
 import {Grid,Chip} from '@material-ui/core';
+import ScatterChart from './ScatterChart'
 import Box from '@material-ui/core/Box';
 import Stack from '@mui/material/Stack';
 import {Typography} from '@material-ui/core';
@@ -117,53 +118,53 @@ class ZoomPanel extends React.Component {
         });
         return (
             <Paper className={classes.zoomPaper}>
-                <Grid direction="column" spacing={0} className={classes.recomGridOuter}>
-                    <Stack direction="row" className={classes.zoomStack} spacing={0}>
-                      <ThemeProvider theme={titleTheme}>
-                        <Typography className={classes.zoomStackTypo} noWrap>
-                          <Typography variant="h5" id="tableTitle" className={classes.zoomTitle1}>
-                              {"Zoom Panel"}
-                          </Typography>
-                          <Typography variant="h6" id="tableTitle" className={classes.zoomTitle2}>
-                              {"("}
-                          </Typography>
-                          <Typography variant="h5" id="tableTitle" className={classes.zoomTitle1}>
-                              {this.props.doc_num}
-                          </Typography>
-                          <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
-                              {"Documents"+", "}
-                          </Typography>
-                          <Typography variant="h5" id="tableTitle" className={classes.zoomTitle3}>
-                              {this.props.word_num}
-                          </Typography>
-                          <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
-                              {"Words, "}
-                          </Typography>
-                          <Typography variant="h5" id="tableTitle" className={classes.zoomTitle3}>
-                              {this.props.auth_num}
-                          </Typography>
-                          <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
-                              {"Authors)"}
-                          </Typography>
+                <Stack direction="column" spacing={0} className={classes.zoomStackOuter}>
+                  <Stack direction="row" className={classes.zoomStack} spacing={0}>
+                    <ThemeProvider theme={titleTheme}>
+                      <Typography className={classes.zoomStackTypo} noWrap>
+                        <Typography variant="h5" id="tableTitle" className={classes.zoomTitle1}>
+                            {"Zoom Panel"}
                         </Typography>
+                        <Typography variant="h6" id="tableTitle" className={classes.zoomTitle2}>
+                            {"("}
+                        </Typography>
+                        <Typography variant="h5" id="tableTitle" className={classes.zoomTitle1}>
+                            {this.props.doc_num}
+                        </Typography>
+                        <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
+                            {"Documents"+", "}
+                        </Typography>
+                        <Typography variant="h5" id="tableTitle" className={classes.zoomTitle3}>
+                            {this.props.word_num}
+                        </Typography>
+                        <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
+                            {"Words, "}
+                        </Typography>
+                        <Typography variant="h5" id="tableTitle" className={classes.zoomTitle3}>
+                            {this.props.auth_num}
+                        </Typography>
+                        <Typography variant="h6" id="tableTitle" className={classes.zoomTitle3}>
+                            {"Authors)"}
+                        </Typography>
+                      </Typography>
+                    </ThemeProvider>
+                    <Stack direction="column" className={classes.zoomSliderStack} spacing={0}>
+                      <ThemeProvider theme={tsneTheme}>
+                      <Typography noWrap variant="h6" id="tableTitle" className={classes.zoomTsneTitle}>
+                          {"T-SNE Shrinkage"}
+                      </Typography>
                       </ThemeProvider>
-                      <Stack direction="column" className={classes.zoomSliderStack} spacing={0}>
+                      <Stack direction="row" className={classes.zoomSliderInnerStack} spacing={0}>
+                        <Box className={classes.zoomSliderBox}>
+                          <Slider defaultValue={0.7} step={0.05} min={0} max={1} valueLabelDisplay="auto" onChange={this.handleChange}/>
+                        </Box>
                         <ThemeProvider theme={tsneTheme}>
-                        <Typography noWrap variant="h6" id="tableTitle" className={classes.zoomTsneTitle}>
-                            {"T-SNE Shrinkage"}
-                        </Typography>
+                          <Typography variant="h6" className={classes.zoomTitle1}>
+                              {this.state.gamma}
+                          </Typography>
                         </ThemeProvider>
-                        <Stack direction="row" className={classes.zoomSliderInnerStack} spacing={0}>
-                          <Box className={classes.zoomSliderBox}>
-                            <Slider defaultValue={0.7} step={0.05} min={0} max={1} valueLabelDisplay="auto" onChange={this.handleChange}/>
-                          </Box>
-                          <ThemeProvider theme={tsneTheme}>
-                            <Typography variant="h6" className={classes.zoomTitle1}>
-                                {this.state.gamma}
-                            </Typography>
-                          </ThemeProvider>
-                        </Stack>
                       </Stack>
+                    </Stack>
                     {/* <Grid container direction="row" className={classes.zoomTsne}>
                         <Grid container direction="column" className={classes.zoomTsne}>
                         <ThemeProvider theme={tsneTheme}>
@@ -182,60 +183,60 @@ class ZoomPanel extends React.Component {
                         </Grid>
                     </Grid> */}
 
-                    </Stack>
-
-                    {/* <Divider/> */}
-                    <Stack direction="row" className={classes.zoomLegendStack}>
-                    <FormGroup aria-label="position" row>
-                    <Grid direction="column" className={classes.grid}>
-                        {this.state.document? 
-                        <Chip color="primary" className={classes.objectChip2} label={
-                          <FormControlLabel 
-                            className={classes.formLabel} 
-                            onChange={this.handleChange_doc} 
-                            control={ <AntSwitch checked={this.state.document} inputProps={{ 'aria-label': 'ant design' }} />} 
-                            label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
-                        }/> :
-                        <Chip className={classes.objectChip2Un} label={
-                          <FormControlLabel 
-                            className={classes.formLabel} 
-                            onChange={this.handleChange_doc} 
-                            control={ <AntSwitch checked={this.state.document} inputProps={{ 'aria-label': 'ant design' }} />} 
-                            label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Document</Typography></ThemeProvider>} />
-                        }/>}
-                        {this.state.keyword? 
-                        <Chip color="primary" className={classes.objectChip2} label={
-                          <FormControlLabel 
-                            className={classes.formLabel} 
-                            onChange={this.handleChange_word} 
-                            control={ <AntSwitch checked={this.state.keyword} inputProps={{ 'aria-label': 'ant design' }} />} 
-                            label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Word</Typography></ThemeProvider>} />
-                        }/> :
-                        <Chip className={classes.objectChip2Un} label={
-                          <FormControlLabel 
-                            className={classes.formLabel} 
-                            onChange={this.handleChange_word} 
-                            control={ <AntSwitch checked={this.state.keyword} inputProps={{ 'aria-label': 'ant design' }} />} 
-                            label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Word</Typography></ThemeProvider>} />
-                        }/>}
-                        {this.state.author? 
-                        <Chip color="primary" className={classes.objectChip2} label={
-                          <FormControlLabel 
-                            className={classes.formLabel} 
-                            onChange={this.handleChange_auth} 
-                            control={ <AntSwitch checked={this.state.author} inputProps={{ 'aria-label': 'ant design' }} />} 
-                            label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
-                        }/> :
-                        <Chip className={classes.objectChip2Un} label={
-                          <FormControlLabel 
-                            className={classes.formLabel} 
-                            onChange={this.handleChange_auth} 
-                            control={ <AntSwitch checked={this.state.author} inputProps={{ 'aria-label': 'ant design' }} />} 
-                            label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Author</Typography></ThemeProvider>} />
-                        }/>}
-                    </Grid>
-                    </FormGroup>
-                      <ThemeProvider theme={tsneTheme}>
+                  </Stack>
+                  {/* <Divider/> */}
+                  <Stack direction="row" className={classes.zoomMiddleRowStack}>
+                    <Stack direction="column" className={classes.zoomLegendStack}>
+                      <FormGroup aria-label="position" row>
+                      <Stack direction="column" className={classes.toggleStack}>
+                          {this.state.document? 
+                          <Chip color="primary" className={classes.objectChip2} label={
+                            <FormControlLabel 
+                              className={classes.formLabel} 
+                              onChange={this.handleChange_doc} 
+                              control={ <AntSwitch checked={this.state.document} inputProps={{ 'aria-label': 'ant design' }} />} 
+                              label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Document <CircleTwoToneIcon className={classes.circleIcon}/></Typography></ThemeProvider>} />
+                          }/> :
+                          <Chip className={classes.objectChip2Un} label={
+                            <FormControlLabel 
+                              className={classes.formLabel} 
+                              onChange={this.handleChange_doc} 
+                              control={ <AntSwitch checked={this.state.document} inputProps={{ 'aria-label': 'ant design' }} />} 
+                              label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Document <CircleTwoToneIcon className={classes.circleIcon}/></Typography></ThemeProvider>} />
+                          }/>}
+                          {this.state.keyword? 
+                          <Chip color="primary" className={classes.objectChip2} label={
+                            <FormControlLabel 
+                              className={classes.formLabel} 
+                              onChange={this.handleChange_word} 
+                              control={ <AntSwitch checked={this.state.keyword} inputProps={{ 'aria-label': 'ant design' }} />} 
+                              label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Word <SquareTwoToneIcon className={classes.squareIcon}/></Typography></ThemeProvider>} />
+                          }/> :
+                          <Chip className={classes.objectChip2Un} label={
+                            <FormControlLabel 
+                              className={classes.formLabel} 
+                              onChange={this.handleChange_word} 
+                              control={ <AntSwitch checked={this.state.keyword} inputProps={{ 'aria-label': 'ant design' }} />} 
+                              label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Word <SquareTwoToneIcon className={classes.squareIcon}/></Typography></ThemeProvider>} />
+                          }/>}
+                          {this.state.author? 
+                          <Chip color="primary" className={classes.objectChip2} label={
+                            <FormControlLabel 
+                              className={classes.formLabel} 
+                              onChange={this.handleChange_auth} 
+                              control={ <AntSwitch checked={this.state.author} inputProps={{ 'aria-label': 'ant design' }} />} 
+                              label={<ThemeProvider theme={objectTypoTheme}><Typography variant="h6" className={classes.entityControlLabel}>Author <SquareTwoToneIcon className={classes.diaIcon}/></Typography></ThemeProvider>} />
+                          }/> :
+                          <Chip className={classes.objectChip2Un} label={
+                            <FormControlLabel 
+                              className={classes.formLabel} 
+                              onChange={this.handleChange_auth} 
+                              control={ <AntSwitch checked={this.state.author} inputProps={{ 'aria-label': 'ant design' }} />} 
+                              label={<ThemeProvider theme={objectTypoThemeUn}><Typography variant="h6" className={classes.entityControlLabel}>Author <SquareTwoToneIcon className={classes.diaIcon}/></Typography></ThemeProvider>} />
+                          }/>}
+                      </Stack>
+                      </FormGroup>
+                      {/* <ThemeProvider theme={tsneTheme}>
                       <Typography noWrap variant="h6" className={classes.zoomLegend}>
                         <CircleTwoToneIcon className={classes.circleIcon}/>
                         {"Document"}
@@ -244,12 +245,29 @@ class ZoomPanel extends React.Component {
                         <SquareTwoToneIcon className={classes.diaIcon} />
                         {"Author"}
                       </Typography>
-                      </ThemeProvider>
+                      </ThemeProvider> */}
+                      <ScatterChart data={this.props.dpoints} 
+                        inclusters = {this.props.inclusters}
+                        outclusters = {this.props.outclusters}
+                        cluster_list={this.props.cluster_list} click={this.props.click} mode={this.props.mode}
+                        search_select_list={this.props.search_select_list}
+                        current_clicked = {this.props.current_clicked}
+                        x_min_max = {this.props.x_min_max}
+                        y_min_max = {this.props.y_min_max}
+                        className={classes.clusterChart} classes={classes}
+                        region_selected = {this.props.region_selected}
+                        set_scatter_size = {this.props.set_scatter_size}
+                        scatter_width = {this.props.scatter_width}
+                        scatter_height = {this.props.scatter_height}
+                        set_select_box_size = {this.props.set_select_box_size}
+                        select_box = {this.props.select_box}
+                        to_vis_items = {this.props.to_vis_items}
+                      />
                     </Stack>
                     <ZoomChart data={this.props.dpoints} cluster_list={this.props.cluster_list} click={this.props.click}
                         search_select_list={this.props.search_select_list}
                         current_clicked = {this.props.current_clicked}
-                        className={classes.clusterChart} classes={classes}
+                        className={classes.zoomChart} classes={classes}
                         zoom_cluster_list = {this.props.zoom_cluster_list}
                         zoom_in_clusters = {this.props.zoom_in_clusters}
                         set_zoom_size = {this.props.set_zoom_size}
@@ -266,7 +284,8 @@ class ZoomPanel extends React.Component {
                         keyword = {this.state.keyword}
                     >
                     </ZoomChart>
-                </Grid>
+                  </Stack>
+                </Stack>
             </Paper>
         )
     }

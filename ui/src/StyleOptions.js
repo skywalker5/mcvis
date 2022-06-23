@@ -14,6 +14,10 @@ export const useStyles = (theme => ({
     upperItem: {
         paddingBottom: theme.spacing(0.6),
     },
+    middleUpperItem: {
+        paddingLeft: theme.spacing(0.6),
+        paddingBottom: theme.spacing(0.6),
+    },
     grow: {
         flexGrow: 1,
     },
@@ -24,19 +28,19 @@ export const useStyles = (theme => ({
     },
     circleIcon:{
         marginRight: theme.spacing(-0.5),
-        transform:"scale(0.6)"
+        transform:"scale(0.4)"
     },
     squareIcon:{
         marginLeft: theme.spacing(0.5),
         marginRight: theme.spacing(-0.5),
-        transform:"scale(0.6)"
+        transform:"scale(0.4)"
     },
     diaIcon:{
         marginLeft: theme.spacing(0.5),
         marginRight: theme.spacing(-0.3),
         transformBox: "fill-box",
         transformOrigin: "center",
-        transform:"rotate(45deg) scale(0.55)",
+        transform:"rotate(45deg) scale(0.38)",
     },
     diaSelected:{
         transformBox: "fill-box",
@@ -172,6 +176,8 @@ export const useStyles = (theme => ({
     entityControlLabel: {
         fontSize:11,
         paddingLeft: 5,
+        display:"flex",
+        alignItems:"center"
     },
     autocomLabel: {
         fontSize:11,
@@ -189,6 +195,38 @@ export const useStyles = (theme => ({
         height: "100%",
         display: "flex",
         padding: theme.spacing(0)
+    },
+    zoomChart: {
+        // borderColor: "black",
+        marginRight:theme.spacing(2),
+        marginBottom:theme.spacing(2),
+        borderRadius:theme.spacing(2),
+    },
+    clusterChart: {
+        // flex: 1,
+    },
+    embeddingChart: {
+        // borderColor: "black",
+        // marginLeft:theme.spacing(2),
+        height: "15vh",
+        marginRight:theme.spacing(2),
+        marginBottom:theme.spacing(2),
+        borderRadius:theme.spacing(2),
+    },
+    zoomStackOuter: {
+        display: "flex",
+        height: "100%",
+        alignItems: "stretch",
+        padding: theme.spacing(0)
+    },
+    toggleStack: {
+        alignItems: "flex-start",
+    },
+    zoomMiddleRowStack: {
+        display: "flex",
+        height: "100%",
+        // alignItems: "center",
+        // justifyContent: "space-between",
     },
     autoCom: {
         flex: 2,
@@ -262,8 +300,10 @@ export const useStyles = (theme => ({
     },
     zoomLegendStack: {
         display: "flex",
-        alignItems: "center",
+        paddingLeft: theme.spacing(2),
+        // alignItems: "center",
         justifyContent: "space-between",
+        maxWidth:"27%",
     },
     zoomSliderStack: {
         display: "flex",
@@ -302,7 +342,8 @@ export const useStyles = (theme => ({
         display:"flex",
     },
     nameTypo: {
-        marginLeft:4,
+        marginLeft:theme.spacing(0.5),
+        marginRight:theme.spacing(1),
     },
     nonzeroTypo: {
         flex:2.8
@@ -350,9 +391,6 @@ export const useStyles = (theme => ({
     },
     searchTextField: {
         // paddingBottom:"5px",
-    },
-    clusterChart: {
-        flex: 1,
     },
     selectSymbol: {
         zIndex: 1,

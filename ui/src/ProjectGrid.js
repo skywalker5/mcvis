@@ -218,15 +218,55 @@ class ProjectGrid extends React.Component {
         return (
             <div className={classes.content}>
                 <Grid container direction="row" className={classes.grid} justify={'space-between'}>
-                    <Grid container item sm={3} md={3} lg={3} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
-                        <Grid item className={classes.upperItem}>
-                            <SearchPanel classes={classes} 
-                            add_selected_data = {this.add_selected_data} auto_list={this.state.auto_list}
-                            year_values = {this.state.year_values}
-                            set_query_data = {this.set_query_data}
-                            />
+                    <Grid container item sm={9} md={9} lg={9} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
+                        <Grid container direction="row" className={classes.grid} justify={'space-between'}>
+                            <Grid item sm={4} md={4} lg={4} className={classes.upperItem}>
+                                <SearchPanel classes={classes} 
+                                add_selected_data = {this.add_selected_data} auto_list={this.state.auto_list}
+                                year_values = {this.state.year_values}
+                                set_query_data = {this.set_query_data}
+                                />
+                            </Grid>
+                            <Grid item sm={8} md={8} lg={8} className={classes.middleUpperItem}>
+                                <ZoomPanel 
+                                    classes={classes} 
+                                    click = {this.click}
+                                    dpoints = {this.state.data_points}
+                                    inclusters = {this.state.in_clusters}
+                                    outclusters = {this.state.out_clusters}
+                                    cluster_list = {this.state.cluster_list}
+                                    current_clicked = {this.state.current_clicked}
+                                    search_select_list = {this.state.search_select_list}
+                                    zoom_cluster_list = {this.state.zoom_cluster_list}
+                                    zoom_in_clusters = {this.state.zoom_in_clusters}
+                                    click_scatter = {this.click_scatter}
+                                    x_min_max = {this.state.x_min_max}
+                                    y_min_max = {this.state.y_min_max}
+                                    mode = {this.state.mode}
+                                    set_mode = {this.set_mode}
+                                    region_selected={this.region_selected}
+                                    set_scatter_size = {this.set_scatter_size}
+                                    scatter_width = {this.state.scatter_width}
+                                    scatter_height = {this.state.scatter_height}
+                                    set_select_box_size = {this.set_select_box_size}
+                                    select_box = {this.state.select_box}
+                                    to_vis_items = {this.state.to_vis_items}
+                                    set_zoom_size = {this.set_zoom_size}
+                                    zoom_width = {this.state.zoom_width}
+                                    zoom_height = {this.state.zoom_height}
+                                    cluster_x_min_max = {this.state.cluster_x_min_max}
+                                    cluster_y_min_max = {this.state.cluster_y_min_max}
+                                    entity_clicked = {this.entity_clicked}
+                                    zoom_x_offset_end = {this.state.zoom_x_offset_end}
+                                    zoom_y_offset_end = {this.state.zoom_y_offset_end}
+                                    zoom_dict={this.state.zoom_dict}
+                                    doc_num={this.state.doc_num}
+                                    word_num={this.state.word_num}
+                                    auth_num={this.state.auth_num}
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item>
+                        {/* <Grid item>
                             <EmbeddingPanel 
                                 classes={classes} 
                                 click = {this.click}
@@ -249,11 +289,17 @@ class ProjectGrid extends React.Component {
                                 select_box = {this.state.select_box}
                                 to_vis_items = {this.state.to_vis_items}
                             />
-                            {/* <RecommendPanel classes={classes} query_data={this.state.query_data} set_clicked_entity={this.set_clicked_entity}/> */}
+                        </Grid> */}
+                        <Grid item >
+                            <DetailPanel classes={classes} query_data={this.state.query_data} set_clicked_entity={this.set_clicked_entity}
+                                entity_clicked = {this.entity_clicked}
+                             doc_num={this.state.doc_num}
+                             word_num={this.state.word_num}
+                             auth_num={this.state.auth_num}/>
                         </Grid>
                     </Grid>
 
-                    <Grid container item sm={6} md={6} lg={6} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
+                    {/* <Grid container item sm={6} md={6} lg={6} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
                         <Grid item className={classes.upperItem}>
                             <ZoomPanel 
                                 classes={classes} 
@@ -279,14 +325,7 @@ class ProjectGrid extends React.Component {
                                 auth_num={this.state.auth_num}
                             />
                         </Grid>
-                        <Grid item >
-                            <DetailPanel classes={classes} query_data={this.state.query_data} set_clicked_entity={this.set_clicked_entity}
-                                entity_clicked = {this.entity_clicked}
-                             doc_num={this.state.doc_num}
-                             word_num={this.state.word_num}
-                             auth_num={this.state.auth_num}/>
-                        </Grid>
-                    </Grid>
+                    </Grid> */}
 
                     <Grid container item sm={3} md={3} lg={3} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
                         <Grid item className={classes.upperItem} >
