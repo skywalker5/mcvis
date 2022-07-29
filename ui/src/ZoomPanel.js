@@ -23,7 +23,7 @@ class ZoomPanel extends React.Component {
           author: true, 
             document: true, 
             keyword: true,
-            gamma: 0.7,
+            gamma: 0.4,
          };
         // this.handleQuery.bind(this);
         // this.populate_candidate_query.bind(this);
@@ -32,40 +32,33 @@ class ZoomPanel extends React.Component {
       this.setState({
           author: !this.state.author
       });
-      axios.post(`${api}/entitychange_zoom/auth_${this.state.author}`)
-      .then(response => {
-          console.log(1)
-      });
+      axios.post(`${api}/entitychange_zoom/auth_${this.state.author}`);
     };
 
     handleChange_doc = (event, click) => {
       this.setState({
           document: !this.state.document
       });
-      axios.post(`${api}/entitychange_zoom/doc_${this.state.document}`)
-      .then(response => {
-          console.log(2)
-      });
+      axios.post(`${api}/entitychange_zoom/doc_${this.state.document}`);
     };
 
     handleChange_word = (event, click) => {
       this.setState({
           keyword: !this.state.keyword
       });
-      axios.post(`${api}/entitychange_zoom/word_${this.state.keyword}`)
-      .then(response => {
-          console.log(3)
-      });
+      axios.post(`${api}/entitychange_zoom/word_${this.state.keyword}`);
     };
 
     handleChangeSlider = (event, newValue) => {
-        
-    };
-
-    handleChange = (event, newValue) => {
-      this.setState({
-        gamma:newValue,
-      });
+      if (newValue != this.state.gamma){
+        this.setState({
+          gamma:newValue,
+        });
+        axios.post(`${api}/tsne_shrinkage_change/${newValue}`)
+        .then(response => {
+          this.props.set_zoom_dict(response.data);
+        })
+      }
     };
 
     render(){
@@ -123,7 +116,7 @@ class ZoomPanel extends React.Component {
                     <ThemeProvider theme={titleTheme}>
                       <Typography className={classes.zoomStackTypo} noWrap>
                         <Typography variant="h5" id="tableTitle" className={classes.zoomTitle1}>
-                            {"Zoom Panel"}
+                            {"Embedding Panel"}
                         </Typography>
                         <Typography variant="h6" id="tableTitle" className={classes.zoomTitle2}>
                             {"("}
@@ -156,7 +149,7 @@ class ZoomPanel extends React.Component {
                       </ThemeProvider>
                       <Stack direction="row" className={classes.zoomSliderInnerStack} spacing={0}>
                         <Box className={classes.zoomSliderBox}>
-                          <Slider defaultValue={0.7} step={0.05} min={0} max={1} valueLabelDisplay="auto" onChange={this.handleChange}/>
+                          <Slider defaultValue={0.4} step={0.05} min={0} max={1} valueLabelDisplay="auto" onChange={this.handleChangeSlider}/>
                         </Box>
                         <ThemeProvider theme={tsneTheme}>
                           <Typography variant="h6" className={classes.zoomTitle1}>
@@ -279,6 +272,7 @@ class ZoomPanel extends React.Component {
                         entity_clicked = {this.props.entity_clicked}
                         zoom_x_offset_end = {this.props.zoom_x_offset_end}
                         zoom_y_offset_end = {this.props.zoom_y_offset_end}
+                        cluster_info = {this.props.cluster_info}
                         author = {this.state.author}
                         document = {this.state.document}
                         keyword = {this.state.keyword}

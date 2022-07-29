@@ -39,41 +39,43 @@ class SearchPanel extends React.Component {
           document: true,
           keyword: true,
           query_str: "",
-          entityNum: ""
+          entityNum: "",
+          topk:1000,
        };
       this.queryTexts = [];
       // this.handleQuery.bind(this);
       // this.populate_candidate_query.bind(this);
   }
 
+  handleChange_topk = (event) => {
+    this.setState({
+        topk: event.target.value
+    });
+    console.log(event.target.value)
+    axios.post(`${api}/topk_change/${event.target.value}`)
+    .then(response => {
+    });
+  };
+
   handleChange_auth = (event, click) => {
     this.setState({
         author: !this.state.author
     });
-    axios.post(`${api}/entitychange_search/auth_${this.state.author}`)
-    .then(response => {
-        console.log(7)
-    });
+    axios.post(`${api}/entitychange_search/auth_${!this.state.author}`)
   };
 
   handleChange_doc = (event, click) => {
     this.setState({
         document: !this.state.document
     });
-    axios.post(`${api}/entitychange_search/doc_${this.state.document}`)
-    .then(response => {
-        console.log(8)
-    });
+    axios.post(`${api}/entitychange_search/doc_${!this.state.document}`);
   };
 
   handleChange_word = (event, click) => {
     this.setState({
         keyword: !this.state.keyword
     });
-    axios.post(`${api}/entitychange_search/word_${this.state.keyword}`)
-    .then(response => {
-        console.log(9)
-    });
+    axios.post(`${api}/entitychange_search/word_${!this.state.keyword}`)
   };
   handleSubmit(event) {
     event.preventDefault();
@@ -331,7 +333,9 @@ class SearchPanel extends React.Component {
                       </ThemeProvider>} 
                     variant="outlined"
                     size="small"
-                    defaultValue="500"/>
+                    defaultValue="1000"
+                    onChange={this.handleChange_topk}
+                    />
                 </Grid>
               </Grid>
               <Divider/>

@@ -88,40 +88,14 @@ class DetailPanel extends React.Component {
         }
       },
     });
-    const qdata = [
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":1,"id":22451},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":2,"id":2241},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-      {"Co-authors":["Rémi Douence","Jean-Marc Menaud","M. Südholt","Fabien Hermenier"],"Name":"Luis Daniel Benavides Navarro","Papers":[2327],"Top Keywords":["grid","invas","pattern","checkpoint","topolog","wellknown","na","hamper","legaci","instanti"],"Type":"Author","cid":11,"id":2955},
-      {"Co-authors":["Jorge M. Santos","Chetak Kandaswamy","Joaquim Marques de Sá"],"Name":"Luís A. Alexandre","Papers":[11344],"Top Keywords":["deep","cost","finetun","supervis","reconstruct","layer","network","train","function","hidden"],"Type":"Author","cid":15,"id":2956},
-      {"Name":"cmac","Synonyms":["lyapunov","chatter","servo","timedelay","control","tank","closedloop","pid","torqu","reactor"],"Type":"Word","cid":16,"id":39456},
-      {"Name":"oil","Synonyms":["featur","select","cepstral","irrelev","abrupt","selector","roc","prerequisit","steel","mutual"],"Type":"Word","cid":6,"id":39478},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":3,"id":22451},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":11,"id":22451},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":11,"id":22451},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":11,"id":22451},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
-      {"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-
-    ];
     function Row(props) {
-      const { row, onClick } = props;
+      const { row, onClick, rate } = props;
       const [open, setOpen] = React.useState(false);
-      const [defaultval, setdefaultval] = React.useState(2.5);
 
       const handleChange_rate = (event, newRate) => {
-        setdefaultval(newRate);
-        axios.post(`${api}/ratechange/${row.id}`+","+`${newRate}`)
-        .then(response => {
-            console.log(1)
-        });
-        props.entity_clicked(1);
+        props.set_rating_list({[row.id]: newRate});
+        // axios.post(`${api}/ratechange/${row.id}`+","+`${newRate}`)
+        // props.entity_clicked(1);
       };
       return (
         <React.Fragment>
@@ -157,7 +131,7 @@ class DetailPanel extends React.Component {
             </TableCell>
             <TableCell className={classes.recomTableRatingCol} >
               <Rating icon={<Star sx={{ fontSize: 15, }} />}
-                  emptyIcon={<StarBorder sx={{ fontSize: 15, }} />} name="rating" defaultValue= {2.5} precision={0.5} />
+                  emptyIcon={<StarBorder sx={{ fontSize: 15, }} />} name="rating" onChange={handleChange_rate} value= {rate} precision={0.5} />
             </TableCell>
           </TableRow>
           <TableRow>
@@ -280,7 +254,9 @@ class DetailPanel extends React.Component {
               <ThemeProvider theme={tableBodyTheme}>
               <TableBody>
                 {Object.keys(this.props.query_data).map((index) => (
-                  <Row key={index} row={this.props.query_data[index]} entity_clicked={this.props.entity_clicked}/>
+                  <Row key={index} row={this.props.query_data[index]} 
+                  rate={(this.props.rating_list[this.props.query_data[index].id]==undefined)? 2.5:this.props.rating_list[this.props.query_data[index].id]}
+                  entity_clicked={this.props.entity_clicked} set_rating_list={this.props.set_rating_list}/>
                 ))}
                 {/* {Object.keys(qdata).map((index) => (
                   <Row key={index} row={qdata[index]} entity_clicked={this.props.entity_clicked}/>

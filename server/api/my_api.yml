@@ -257,6 +257,21 @@ paths:
             type: array
             items:
               $ref: '#/definitions/autoWord'
+  /topk_change/{topknum}:
+    post:
+      operationId: datavis.topk_change
+      tags:
+        - change topk num
+      summary: change topk num
+      parameters:
+        - name: topknum
+          in: path
+          description: topk num value
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
   /entitychange_search/{state}:
     post:
       operationId: datavis.entity_change_search
@@ -272,6 +287,21 @@ paths:
       responses:
         200:
           description: OK
+  /tsne_shrinkage_change/{gamma}:
+    post:
+      operationId: datavis.tsne_shrinkage_change
+      tags:
+        - change tsne shrinkage
+      summary: change tsne shrinkage
+      parameters:
+        - name: gamma
+          in: path
+          description: etype value
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK  
   /entitychange_zoom/{state}:
     post:
       operationId: datavis.entity_change_zoom
@@ -305,6 +335,21 @@ paths:
   /ratechange/{rate}:
     post:
       operationId: datavis.rate_change
+      tags:
+        - change rate
+      summary: change rate
+      parameters:
+        - name: rate
+          in: path
+          description: rate value
+          type: string
+          required: true
+      responses:
+        200:
+          description: OK
+  /ratechange_cluster/{rate}:
+    post:
+      operationId: datavis.rate_change_cluster
       tags:
         - change rate
       summary: change rate

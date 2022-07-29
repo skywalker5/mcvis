@@ -26,12 +26,12 @@ def get_answers(question):
 def filter_data(self, etype, qtree):
     print(1)
 
-def get_searchquery(query_text, mode="new", topk=1000):
+def get_searchquery(query_text, mode="new"):
     query_tree = pr.query_dict[query_text]
     output_points = []
 
     if mode=="new":
-        filtered_df, word_df, auth_df = pr.filter_all_entity(query_tree, topk)
+        filtered_df, word_df, auth_df = pr.filter_all_entity(query_tree, pr.topknum)
     else:
         filtered_df = pr.filter_dataset(query_tree)
         word_df = pr.filter_word(query_tree)
@@ -52,31 +52,41 @@ def get_searchquery(query_text, mode="new", topk=1000):
     coord_data = {k:pr.original_data[k] for k in all_ids}
     inclusters = {k['id']:pr.original_clusters[k['id']] for k in result_dict}
     
-    output_list = [k['id'] for k in result_dict]
-    pr.H_filtered = pr.H[output_list].T
+    pr.output_list = [k['id'] for k in result_dict]
+    pr.H_filtered = pr.H[pr.output_list].T
     if query_text == '("matrix" AND "factori")  OR ("biolog")':
-        H = sio.loadmat("data/temp.mat")["H"]
-    elif query_text == '("matrix")  OR ("biolog")':
-        H = sio.loadmat("data/temp_matrix.mat")["H"]
-    elif query_text == '("neural" AND "network")  OR ("cancer")':
         try:
-            data = sio.loadmat("data/temp_matrix_bio.mat")
+            data = sio.loadmat("data/temp.mat")
             H,W = data["H"], data["W"]
         except:
             W, H, info = NMF().run(pr.H_filtered, 20)
-            sio.savemat("data/temp_matrix_bio.mat", {"H":H})
+            sio.savemat("data/temp.mat", {"H":H, "W":W})
+    elif query_text == '("matrix")  OR ("biolog")':
+        try:
+            data = sio.loadmat("data/temp_matrix.mat")
+            H,W = data["H"], data["W"]
+        except:
+            W, H, info = NMF().run(pr.H_filtered, 20)
+            sio.savemat("data/temp_matrix.mat", {"H":H, "W":W})
+    # elif query_text == '("neural" AND "network")  OR ("cancer")':
+        # try:
+        #     data = sio.loadmat("data/temp_matrix_bio.mat")
+        #     H,W = data["H"], data["W"]
+        # except:
+        #     W, H, info = NMF().run(pr.H_filtered, 20)
+        #     sio.savemat("data/temp_matrix_bio.mat", {"H":H})
     else:
         W, H, info = NMF().run(pr.H_filtered, 20)
     cids=H.argmax(axis=1)
-    H_filtered = pr.H[output_list]
-    H_tsne_filtered = pr.H_tsne[output_list]
-    cid_dict = {
+    pr.H_filtered_tsne = pr.H[pr.output_list]
+    pr.H_tsne_filtered = pr.H_tsne[pr.output_list]
+    pr.cid_dict = {
         "cids":cids
     }
 
     for i in range(len(cids)):
-        cid_dict.setdefault(cids[i],[])
-        cid_dict[cids[i]].append(i)
+        pr.cid_dict.setdefault(cids[i],[])
+        pr.cid_dict[cids[i]].append(i)
     if query_text == '("matrix" AND "factori")  OR ("biolog")':
         embed = sio.loadmat("data/temp_tsne.mat")["embedding"]
         tsne_x = embed[:,0].tolist()
@@ -85,50 +95,64 @@ def get_searchquery(query_text, mode="new", topk=1000):
         embed = sio.loadmat("data/temp_tsne_matrix.mat")["embedding"]
         tsne_x = embed[:,0].tolist()
         tsne_y = embed[:,1].tolist()
-    elif query_text == '("neural" AND "network")  OR ("cancer")d':
-        try:
-            embed = sio.loadmat("data/temp_tsne_matrix_bio.mat")["embedding"]
-            tsne_x = embed[:,0].tolist()
-            tsne_y = embed[:,1].tolist()
-        except:
-            X_embedded = TSNE(n_components=2, init=H_tsne_filtered, metric="cosine", 
-                        cluster_ids = cid_dict, n_jobs = 4,
-                        cluster_supervise=True, shrinkage=0.4,
-                        early_exaggeration=4.0)
-            X_embedded.fit_transform(H_filtered)
+    # elif query_text == '("neural" AND "network")  OR ("cancer")':
+    #     try:
+    #         embed = sio.loadmat("data/temp_tsne_matrix_bio.mat")["embedding"]
+    #         tsne_x = embed[:,0].tolist()
+    #         tsne_y = embed[:,1].tolist()
+    #     except:
+    #         X_embedded = TSNE(n_components=2, init=pr.H_tsne_filtered, metric="cosine", 
+    #                     cluster_ids = pr.cid_dict, n_jobs = 4,
+    #                     cluster_supervise=True, shrinkage=0.4,
+    #                     early_exaggeration=4.0)
+    #         X_embedded.fit_transform(pr.H_filtered_tsne)
 
-            tsne_x = X_embedded.embedding_[:,0].tolist()
-            tsne_y = X_embedded.embedding_[:,1].tolist()
-            sio.savemat("data/temp_tsne_matrix_bio.mat", {"embedding":X_embedded.embedding_})
+    #         tsne_x = X_embedded.embedding_[:,0].tolist()
+    #         tsne_y = X_embedded.embedding_[:,1].tolist()
+    #         sio.savemat("data/temp_tsne_matrix_bio.mat", {"embedding":X_embedded.embedding_})
             
     else:
-        X_embedded = TSNE(n_components=2, init=H_tsne_filtered, metric="cosine", 
-                    cluster_ids = cid_dict, n_jobs = 4,
-                    cluster_supervise=True, shrinkage=0.4,
+        X_embedded = TSNE(n_components=2, init=pr.H_tsne_filtered, metric="cosine", 
+                    cluster_ids = pr.cid_dict, n_jobs = 4,
+                    cluster_supervise=True, shrinkage=pr.tsne_shrinkage,
                     early_exaggeration=4.0)
-        X_embedded.fit_transform(H_filtered)
+        X_embedded.fit_transform(pr.H_filtered_tsne)
 
         tsne_x = X_embedded.embedding_[:,0].tolist()
         tsne_y = X_embedded.embedding_[:,1].tolist()
-    clusters = cids.tolist()
+    pr.clusters_tsne = cids.tolist()
 
-    zoom_dict = {
-        output_list[i]:{
+    pr.zoom_dict = {
+        pr.output_list[i]:{
             'x':tsne_x[i],
             'y':tsne_y[i],
-            'cid':clusters[i],
+            'cid':pr.clusters_tsne[i],
         }
-        for i in range(len(output_list))
+        for i in range(len(pr.output_list))
     }
     for i in range(len(result_dict)):
         result_dict[i]['cid'] = int(cids[i])
+
+    pr.cluster_info = []
+    topk=10
+    top_rel = -pr.H @ W
+    top_entity = top_rel[:pr.n_a+pr.n_d]
+    top_word = top_rel[pr.n_a+pr.n_d:]
+    for i in range(H.shape[1]):
+        top_ent_ids = top_entity[:,i].argsort()[:topk]
+        pr.cluster_info.append({
+            "Top Objects": [[pr.name_df[j], "Author" if j<pr.n_a else "Doc"] for j in top_ent_ids],
+            "Keywords":pr.name_df[top_word[:,i].argsort()[:topk]+(pr.n_a+pr.n_d)].tolist(),
+            "ratings":2.5,
+            "cid":i+1,
+        })
     return [result_dict,coord_data,
         inclusters,
         pr.indices_to_vis,
         pr.indices_to_vis,
         inclusters, 
         pr.window_width_zoom, 
-        pr.window_height_zoom, [pr.x_min, pr.x_max], [pr.y_min, pr.y_max], zoom_dict]
+        pr.window_height_zoom, [pr.x_min, pr.x_max], [pr.y_min, pr.y_max], pr.zoom_dict, pr.cluster_info, {k['id']:k for k in result_dict}]
 
 def add_filter_item(index):
     pr.search_current_selected_items.add(index)
@@ -473,6 +497,27 @@ def entity_change_zoom(state):
     etype, tfval = state.split("_")
     pr.etype_selection_zoom[etype] = (tfval == "true")
 
+def tsne_shrinkage_change(gamma):
+    pr.tsne_shrinkage = float(gamma)
+    X_embedded = TSNE(n_components=2, init=pr.H_tsne_filtered, metric="cosine", 
+                cluster_ids = pr.cid_dict, n_jobs = 4,
+                cluster_supervise=True, shrinkage=pr.tsne_shrinkage,
+                early_exaggeration=4.0)
+    X_embedded.fit_transform(pr.H_filtered_tsne)
+
+    tsne_x = X_embedded.embedding_[:,0].tolist()
+    tsne_y = X_embedded.embedding_[:,1].tolist()
+    pr.zoom_dict = {
+        pr.output_list[i]:{
+            'x':tsne_x[i],
+            'y':tsne_y[i],
+            'cid':pr.clusters_tsne[i],
+        }
+        for i in range(len(pr.output_list))
+    }
+    return [pr.zoom_dict]
+
+
 def entity_change_recom(state):
     etype, tfval = state.split("_")
     pr.etype_selection_recom[etype] = (tfval == "true")
@@ -480,8 +525,16 @@ def entity_change_recom(state):
 def entity_change_search(state):
     etype, tfval = state.split("_")
     pr.etype_selection_search[etype] = (tfval == "true")
+
+def topk_change(topknum):
+    pr.topknum = int(topknum)
     
 def rate_change(rate):
     target_id, target_rate = rate.split(',')
     target_id, target_rate = int(target_id), float(target_rate)
     pr.current_rate[target_id] = target_rate
+    
+def rate_change_cluster(rate):
+    target_id, target_rate = rate.split(',')
+    target_id, target_rate = int(target_id), float(target_rate)
+    pr.cluster_info[target_id-1]['rating'] = target_rate

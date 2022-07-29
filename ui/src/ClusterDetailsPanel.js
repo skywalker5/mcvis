@@ -149,8 +149,15 @@ class ClusterDetailsPanel extends React.Component {
       },
     });
     function Row(props) {
-      const { cid, data } = props;
+      const { cid, data,rate } = props;
       const [open, setOpen] = React.useState(false);
+      // const [rate, setRate] = React.useState(2.5);
+      
+      const handleChange_rate = (event, newRate) => {
+        // setRate(newRate);
+        props.set_cluster_rating_list({[cid]: newRate});
+        // axios.post(`${api}/ratechange_cluster/${cid}`+","+`${newRate}`);
+      };
       return (
         <React.Fragment>
           <TableRow id={cid} sx={{ '& > *': { borderBottom: 'unset' } }}> 
@@ -178,7 +185,7 @@ class ClusterDetailsPanel extends React.Component {
             </TableCell>
             <TableCell className={classes.recomTableRatingCol} >
             <Rating icon={<Star sx={{ fontSize: 15, }} />}
-                  emptyIcon={<StarBorder sx={{ fontSize: 15, }} />} name="rating" defaultValue= {2.5} precision={0.5} />
+                  emptyIcon={<StarBorder sx={{ fontSize: 15, }} />} name="rating" value= {rate} onChange={handleChange_rate} precision={0.5} />
               {/* <Rating name="rating" defaultValue= {2.5} precision={0.5} />  */}
             </TableCell>
           </TableRow>
@@ -212,45 +219,6 @@ class ClusterDetailsPanel extends React.Component {
     }
 
 
-    const cluster_ids = [
-      0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
-    ];
-    const cdata = [
-      {
-        "Top Objects":[
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
-        ],
-        "Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],
-        "cid":1,
-      },
-      {
-        "Top Objects":[
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
-        ],
-        "Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],
-        "cid":2,
-      },
-      {
-        "Top Objects":[
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Doc"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
-          ["A New Method for Fish Disease Diagnosis System Based on Rough Set and Classifier Fusion", "Author"],
-        ],
-        "Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],
-        "cid":3,
-      },
-    ]
-
     const {classes} = this.props;
     
       return (
@@ -283,10 +251,12 @@ class ClusterDetailsPanel extends React.Component {
                         zoom_dict = {this.props.zoom_dict}
                       />
                     ))} */}
-                    {cdata.map((cd) => (
+                    {this.props.cluster_info.map((cd) => (
                       <Row
                         cid={cd.cid} 
                         data={cd}
+                        set_cluster_rating_list={this.props.set_cluster_rating_list}
+                        rate={(this.props.cluster_rating_list[cd.cid]==undefined)? 2.5:this.props.cluster_rating_list[cd.cid]}
                       />
                     ))}
                   </TableBody>

@@ -43,11 +43,16 @@ class ProjectGrid extends React.Component {
             zoom_x_offset_end:[],
             zoom_y_offset_end:[],
             zoom_dict:{},
+            cluster_info:[],
+            query_dict:{},
             year_values:[2009,2018],
             doc_num:0,
             word_num:0,
             auth_num:0,
+            rating_list:{},
+            cluster_rating_list:{},
         };
+        this.set_zoom_dict = this.set_zoom_dict.bind(this)
         this.click_scatter = this.click_scatter.bind(this)
         this.get_auto_list = this.get_auto_list.bind(this)
         this.add_selected_data = this.add_selected_data.bind(this)
@@ -62,6 +67,24 @@ class ProjectGrid extends React.Component {
         this.entity_clicked = this.entity_clicked.bind(this);
         this.set_select_box_size = this.set_select_box_size.bind(this);
         this.set_query_data = this.set_query_data.bind(this);
+        this.set_rating_list = this.set_rating_list.bind(this);
+        this.set_cluster_rating_list = this.set_cluster_rating_list.bind(this);
+    }
+    set_rating_list(rate_item){
+        this.setState({
+            rating_list:{
+                ...this.state.rating_list,
+                ...rate_item,
+            }
+        });
+    }
+    set_cluster_rating_list(rate_item){
+        this.setState({
+            cluster_rating_list:{
+                ...this.state.cluster_rating_list,
+                ...rate_item,
+            }
+        })
     }
     set_select_box_size(select_box){
         this.setState({
@@ -108,6 +131,7 @@ class ProjectGrid extends React.Component {
             
             axios.post(`${api}/getzoom/${xmin}`+","+`${xmax}`+","+`${ymin}`+","+`${ymax}`)
             .then(response => {
+
                 this.setState({
                     zoom_cluster_list:response.data[0],
                     zoom_in_clusters:response.data[1],
@@ -120,6 +144,12 @@ class ProjectGrid extends React.Component {
             });
         }
     }
+    set_zoom_dict(query_data){
+        this.setState({
+            zoom_dict:query_data[0],
+        })
+    }
+
     set_query_data(query_data){
         let doc_num = query_data[0].filter(function(element){
             return element.Type == 'Doc';
@@ -142,6 +172,8 @@ class ProjectGrid extends React.Component {
             cluster_x_min_max:query_data[8],
             cluster_y_min_max:query_data[9],
             zoom_dict:query_data[10],
+            cluster_info:query_data[11],
+            query_dict:query_data[12],
             doc_num:doc_num,
             word_num:word_num,
             auth_num:auth_num,
@@ -263,6 +295,8 @@ class ProjectGrid extends React.Component {
                                     doc_num={this.state.doc_num}
                                     word_num={this.state.word_num}
                                     auth_num={this.state.auth_num}
+                                    set_zoom_dict={this.set_zoom_dict}
+                                    cluster_info={this.state.cluster_info}
                                 />
                             </Grid>
                         </Grid>
@@ -295,7 +329,9 @@ class ProjectGrid extends React.Component {
                                 entity_clicked = {this.entity_clicked}
                              doc_num={this.state.doc_num}
                              word_num={this.state.word_num}
-                             auth_num={this.state.auth_num}/>
+                             auth_num={this.state.auth_num}
+                             set_rating_list={this.set_rating_list}
+                             rating_list={this.state.rating_list}/>
                         </Grid>
                     </Grid>
 
@@ -334,15 +370,21 @@ class ProjectGrid extends React.Component {
                                 data = {this.state.data_points}
                                 zoom_in_clusters = {this.state.zoom_in_clusters}
                                 zoom_dict={this.state.zoom_dict}
+                                cluster_info={this.state.cluster_info}
                                 change_select_state={this.change_select_state}
-                                delete_select_state={this.delete_select_state}/>
+                                delete_select_state={this.delete_select_state}
+                                set_cluster_rating_list={this.set_cluster_rating_list}
+                                cluster_rating_list={this.state.cluster_rating_list}/>
                             
                         </Grid>
                         <Grid item className={classes.upperItem} >
                             <RatedPanel classes={classes} 
+                                query_dict={this.state.query_dict} 
                                 query_data={this.state.query_data} 
                                 set_clicked_entity={this.set_clicked_entity}
                                 recom_entities={this.state.recom_entities}
+                                rating_list={this.state.rating_list}
+                                cluster_rating_list={this.state.cluster_rating_list}
                                 />
                         </Grid>
                         <Grid item >

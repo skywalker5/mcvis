@@ -164,8 +164,34 @@ class RatedPanel extends React.Component {
 
     ];
 
+    function ClusterRow(props) {
+      const { cid, rating } = props;
+      return (
+        <React.Fragment>
+          <TableRow id={"row"+cid} sx={{ '& > *': { borderBottom: 'unset' } }} hover> 
+            <TableCell className={classes.recomTableArrowCol}>
+            </TableCell>
+            <TableCell align="left" className={classes.recomTableIDCol} component="th" scope="row">
+                <Typography variant="h6">
+                  {cid}
+                </Typography>
+            </TableCell>
+            <TableCell align="left" >
+              <Typography variant="h6">
+                {"Cluster"}
+              </Typography>
+            </TableCell>
+            <TableCell className={classes.recomTableRatingCol} >
+              <Rating icon={<Star sx={{ fontSize: 15, }} />}
+                  emptyIcon={<StarBorder sx={{ fontSize: 15, }} />} name="rating" defaultValue= {rating} precision={0.5} />
+            </TableCell>
+          </TableRow>
+        </React.Fragment>
+      );
+    }
+
     function Row(props) {
-      const { row } = props;
+      const { row, rating } = props;
       const [open, setOpen] = React.useState(false);
       return (
         <React.Fragment>
@@ -191,7 +217,7 @@ class RatedPanel extends React.Component {
             </TableCell>
             <TableCell className={classes.recomTableRatingCol} >
               <Rating icon={<Star sx={{ fontSize: 15, }} />}
-                  emptyIcon={<StarBorder sx={{ fontSize: 15, }} />} name="rating" defaultValue= {row.rating} precision={0.5} />
+                  emptyIcon={<StarBorder sx={{ fontSize: 15, }} />} name="rating" value= {rating} precision={0.5} />
             </TableCell>
           </TableRow>
           <TableRow>
@@ -322,8 +348,11 @@ class RatedPanel extends React.Component {
                   <TableCell>Entity ID</TableCell>
                   <TableCell>Entities #</TableCell>
                 </TableRow> */}
-                {Object.keys(qdata).map((index) => (
-                  <Row key={index} row={qdata[index]}/>
+                {Object.keys(this.props.rating_list).map((index) => (
+                  <Row key={index} row={this.props.query_dict[index]} rating={this.props.rating_list[index]}/>
+                ))}
+                {Object.keys(this.props.cluster_rating_list).map((index) => (
+                  <ClusterRow cid={index} rating={this.props.cluster_rating_list[index]}/>
                 ))}
               </TableBody>
               </ThemeProvider>

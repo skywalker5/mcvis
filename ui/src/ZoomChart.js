@@ -13,7 +13,6 @@ const colors = ['#8dd3c7', '#ffffb3', '#bebada',
 ];
 
 export const ZoomChart = (props) => {
-  const [open, setOpen] = React.useState(false);
   let xScale = scaleLinear()
   .domain(props.cluster_x_min_max)
   .range([0, props.zoom_width]);
@@ -23,15 +22,9 @@ export const ZoomChart = (props) => {
   const containerRef = useRef(null);
 
   function CircleZoom(props) {
-    const [open, setOpen] = React.useState(false);
-    const handleTooltipOpen = (event) => {
-      event.preventDefault();
-      setOpen(!open);
-    };
 
     return(
       <Tooltip 
-        open={open}
         disableFocusListener
         disableHoverListener
         disableTouchListener
@@ -44,7 +37,6 @@ export const ZoomChart = (props) => {
           cy={props.cy}
           stroke={props.stroke}
           fill={props.fill}
-          onContextMenu={handleTooltipOpen}
           >
             
         </circle>
@@ -53,16 +45,9 @@ export const ZoomChart = (props) => {
   }
 
   function RectZoom(props) {
-    const [open, setOpen] = React.useState(false);
-    const handleTooltipOpen = (event) => {
-      event.preventDefault();
-      setOpen(!open);
-    };
-
     
     return(
       <Tooltip 
-        open={open}
         disableFocusListener
         disableHoverListener
         disableTouchListener
@@ -76,7 +61,6 @@ export const ZoomChart = (props) => {
           y={props.y}
           stroke={props.stroke}
           fill={props.fill}
-          onContextMenu={handleTooltipOpen}
           >
         </rect>
             
@@ -85,15 +69,9 @@ export const ZoomChart = (props) => {
   }
 
   function DiaZoom(props) {
-    const [open, setOpen] = React.useState(false);
-    const handleTooltipOpen = (event) => {
-      event.preventDefault();
-      setOpen(!open);
-    };
     
     return(
       <Tooltip 
-        open={open}
         disableFocusListener
         disableHoverListener
         disableTouchListener
@@ -108,7 +86,6 @@ export const ZoomChart = (props) => {
           className={props.className}
           stroke={props.stroke}
           fill={props.fill}
-          onContextMenu={handleTooltipOpen}
           >
         </rect>
             
@@ -136,11 +113,7 @@ export const ZoomChart = (props) => {
                   {Object.keys(props.zoom_in_clusters).map((index) => (
                     (props.document & props.data[index].etype === 'doc')? (
                       <Tooltip 
-                        open={open}
-                        disableFocusListener
-                        disableHoverListener
-                        disableTouchListener
-                        title={<Rating name="rating" size="small" defaultValue= {2.5} precision={0.5} />}
+                        title={props.cluster_info[props.zoom_dict[index].cid-1]["Keywords"].join(", ")} followCursor
 
                       >
                       <a href={"#row"+index} style={{"cursor": "default"}}>
@@ -159,11 +132,7 @@ export const ZoomChart = (props) => {
                     ):(
                       (props.keyword & props.data[index].etype === 'word')? (
                         <Tooltip 
-                          open={open}
-                          disableFocusListener
-                          disableHoverListener
-                          disableTouchListener
-                          title={<Rating name="rating" size="small" defaultValue= {2.5} precision={0.5} />}
+                          title={props.cluster_info[props.zoom_dict[index].cid-1]["Keywords"].join(", ")} followCursor
 
                         >
                         <a href={"#row"+index} style={{"cursor": "default"}}>
@@ -184,11 +153,7 @@ export const ZoomChart = (props) => {
                       ):(
                         (props.author & props.data[index].etype === 'author')? (
                           <Tooltip 
-                            open={open}
-                            disableFocusListener
-                            disableHoverListener
-                            disableTouchListener
-                            title={<Rating name="rating" size="small" defaultValue= {2.5} precision={0.5} />}
+                            title={props.cluster_info[props.zoom_dict[index].cid-1]["Keywords"].join(", ")} followCursor
   
                           >
                           <a href={"#row"+index} style={{"cursor": "default"}}>

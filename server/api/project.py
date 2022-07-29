@@ -44,6 +44,13 @@ class Project:
             auth_meta_path=None, word_meta_path=None,
             doc_meta_path=None, emb_path=None, author_doc_path=None, author_author_path=None,
         doc_doc_path=None, author_word_path=None, doc_word_path=None):
+        
+        ## Search Panel
+        self.topknum = 1000
+
+        ## Embedding Panel
+        self.tsne_shrinkage = 0.4
+        
         self.name = name
         self.docset_path = docset_path
         self.auth_meta_path = auth_meta_path
@@ -93,19 +100,19 @@ class Project:
         self.query_cands = []
 
         self.etype_selection_search= {
-            'author': True,
+            'auth': True,
             'doc': True,
             'word': True,
         }
 
         self.etype_selection_zoom= {
-            'author': True,
+            'auth': True,
             'doc': True,
             'word': True,
         }
 
         self.etype_selection_recom= {
-            'author': True,
+            'auth': True,
             'doc': True,
             'word': True,
         }
@@ -170,6 +177,9 @@ class Project:
 
             self.doc_meta_df = pd.read_csv(doc_meta_path, index_col=0)
             self.doc_meta_df.index = range(len(self.doc_meta_df))
+
+            self.name_df = pd.concat([self.auth_meta_df['name'], self.doc_meta_df['title'], self.word_meta_df['word']]).to_numpy()
+
             self.emb_mat_dict = sio.loadmat(emb_path)
             self.author_doc_df = pd.read_csv(author_doc_path, index_col=0)
             self.author_doc_df.index = self.author_doc_df.index-1
@@ -376,11 +386,12 @@ class Project:
             else:
                 flag = ((flag) | self.query_contain_single_query_all_entity(queries[2*i+2], topk, mode))
 
-        filtered_doc = self.doc_df[flag[self.n_a:self.n_a+self.n_d]]
-        filtered_word = self.word_meta_df[flag[self.n_a+self.n_d:self.n_a+self.n_d+self.n_w]]
+        filtered_doc = self.doc_df[flag[self.n_a:self.n_a+self.n_d]] if self.etype_selection_search["doc"] == True else pd.DataFrame()
+        filtered_word = self.word_meta_df[flag[self.n_a+self.n_d:self.n_a+self.n_d+self.n_w]] if self.etype_selection_search["word"] == True else pd.DataFrame()
         # filtered_auth = self.auth_meta_df[flag[:self.n_a]]
         # filtered_auth = self.auth_meta_df.loc[self.author_doc_df[self.author_doc_df.doc.isin(filtered_doc.index)].index.unique()]
-        filtered_auth = self.auth_meta_df.loc[self.author_doc_df[self.author_doc_df.doc.isin(filtered_doc.index)].index.unique().union(np.where(flag[:self.n_a])[0])]
+        filtered_auth = self.auth_meta_df.loc[self.author_doc_df[self.author_doc_df.doc.isin(filtered_doc.index)].index.unique().union(np.where(flag[:self.n_a])[0])] \
+             if self.etype_selection_search["auth"] == True else pd.DataFrame()
         return filtered_doc, filtered_word, filtered_auth
 
     def filter_dataset(self, queries):
@@ -492,10 +503,18 @@ class Project:
                 output = self.word_meta_df['word'].at[self.word_meta_df.apply(
                     lambda x:levenshtein.distance(
                         x['word'], word) 
-                    if (type(x['word'])==str and word.startswith(x['word'])) 
+                    if (type(x['word'])==str and (word[:3].startswith(x['word'][:3]) or x['word'][:3].startswith(word[:3]))) 
                     else 10000, 
                     axis=1
                 ).idxmin()]
+                if output==self.word_meta_df['word'].iat[0]:
+                    output = self.word_meta_df['word'].at[self.word_meta_df.apply(
+                        lambda x:levenshtein.distance(
+                            x['word'], word) 
+                        if (type(x['word'])==str and word.startswith(x['word'][:1])) 
+                        else 10000, 
+                        axis=1
+                    ).idxmin()]
                 self.closest_voc_dict[word] = output
             return output
         
