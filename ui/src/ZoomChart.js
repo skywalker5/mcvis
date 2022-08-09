@@ -113,7 +113,7 @@ export const ZoomChart = (props) => {
                   {Object.keys(props.zoom_in_clusters).map((index) => (
                     (props.document & props.data[index].etype === 'doc')? (
                       <Tooltip 
-                        title={props.cluster_info[props.zoom_dict[index].cid-1]["Keywords"].join(", ")} followCursor
+                        title={props.cluster_info[props.zoom_dict[index].cid]["Keywords"].join(", ")} followCursor
 
                       >
                       <a href={"#row"+index} style={{"cursor": "default"}}>
@@ -132,7 +132,7 @@ export const ZoomChart = (props) => {
                     ):(
                       (props.keyword & props.data[index].etype === 'word')? (
                         <Tooltip 
-                          title={props.cluster_info[props.zoom_dict[index].cid-1]["Keywords"].join(", ")} followCursor
+                          title={props.cluster_info[props.zoom_dict[index].cid]["Keywords"].join(", ")} followCursor
 
                         >
                         <a href={"#row"+index} style={{"cursor": "default"}}>
@@ -144,7 +144,6 @@ export const ZoomChart = (props) => {
                           y={yScale(props.zoom_dict[index].y)}
                           stroke={in_stroke}
                           fill={interpolateTurbo(props.zoom_dict[index].cid/20.0)}
-                          onClick={props.entity_clicked}
                           >
                             
                         </RectZoom>
@@ -153,7 +152,7 @@ export const ZoomChart = (props) => {
                       ):(
                         (props.author & props.data[index].etype === 'author')? (
                           <Tooltip 
-                            title={props.cluster_info[props.zoom_dict[index].cid-1]["Keywords"].join(", ")} followCursor
+                            title={props.cluster_info[props.zoom_dict[index].cid]["Keywords"].join(", ")} followCursor
   
                           >
                           <a href={"#row"+index} style={{"cursor": "default"}}>
@@ -166,7 +165,6 @@ export const ZoomChart = (props) => {
                             className={props.classes.dia}
                             stroke={in_stroke}
                             fill={interpolateTurbo(props.zoom_dict[index].cid/20.0)}
-                            onClick={props.entity_clicked}
                             >
                               
                           </DiaZoom>

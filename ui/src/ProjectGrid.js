@@ -52,6 +52,7 @@ class ProjectGrid extends React.Component {
             rating_list:{},
             cluster_rating_list:{},
         };
+        this.get_recom = this.get_recom.bind(this)
         this.set_zoom_dict = this.set_zoom_dict.bind(this)
         this.click_scatter = this.click_scatter.bind(this)
         this.get_auto_list = this.get_auto_list.bind(this)
@@ -64,7 +65,6 @@ class ProjectGrid extends React.Component {
         this.set_zoom_size = this.set_zoom_size.bind(this);
         this.change_select_state = this.change_select_state.bind(this);
         this.delete_select_state = this.delete_select_state.bind(this);
-        this.entity_clicked = this.entity_clicked.bind(this);
         this.set_select_box_size = this.set_select_box_size.bind(this);
         this.set_query_data = this.set_query_data.bind(this);
         this.set_rating_list = this.set_rating_list.bind(this);
@@ -180,13 +180,10 @@ class ProjectGrid extends React.Component {
         })
     }
 
-    entity_clicked(d) {
-        axios.post(`${api}/getrecom/${d}`)
-        .then(response => {
-            this.setState({
-                recom_entities:response.data[0],
-            });
-        });
+    get_recom(d){
+        this.setState({
+            recom_entities:d,
+        });        
     }
     set_mode(mode_){
         this.setState({mode:mode_})
@@ -288,7 +285,6 @@ class ProjectGrid extends React.Component {
                                     zoom_height = {this.state.zoom_height}
                                     cluster_x_min_max = {this.state.cluster_x_min_max}
                                     cluster_y_min_max = {this.state.cluster_y_min_max}
-                                    entity_clicked = {this.entity_clicked}
                                     zoom_x_offset_end = {this.state.zoom_x_offset_end}
                                     zoom_y_offset_end = {this.state.zoom_y_offset_end}
                                     zoom_dict={this.state.zoom_dict}
@@ -326,42 +322,13 @@ class ProjectGrid extends React.Component {
                         </Grid> */}
                         <Grid item >
                             <DetailPanel classes={classes} query_data={this.state.query_data} set_clicked_entity={this.set_clicked_entity}
-                                entity_clicked = {this.entity_clicked}
-                             doc_num={this.state.doc_num}
+                                doc_num={this.state.doc_num}
                              word_num={this.state.word_num}
                              auth_num={this.state.auth_num}
                              set_rating_list={this.set_rating_list}
                              rating_list={this.state.rating_list}/>
                         </Grid>
                     </Grid>
-
-                    {/* <Grid container item sm={6} md={6} lg={6} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
-                        <Grid item className={classes.upperItem}>
-                            <ZoomPanel 
-                                classes={classes} 
-                                click = {this.click}
-                                dpoints = {this.state.data_points}
-                                cluster_list = {this.state.cluster_list}
-                                current_clicked = {this.state.current_clicked}
-                                search_select_list = {this.state.search_select_list}
-                                zoom_cluster_list = {this.state.zoom_cluster_list}
-                                zoom_in_clusters = {this.state.zoom_in_clusters}
-                                click_scatter = {this.click_scatter}
-                                set_zoom_size = {this.set_zoom_size}
-                                zoom_width = {this.state.zoom_width}
-                                zoom_height = {this.state.zoom_height}
-                                cluster_x_min_max = {this.state.cluster_x_min_max}
-                                cluster_y_min_max = {this.state.cluster_y_min_max}
-                                entity_clicked = {this.entity_clicked}
-                                zoom_x_offset_end = {this.state.zoom_x_offset_end}
-                                zoom_y_offset_end = {this.state.zoom_y_offset_end}
-                                zoom_dict={this.state.zoom_dict}
-                                doc_num={this.state.doc_num}
-                                word_num={this.state.word_num}
-                                auth_num={this.state.auth_num}
-                            />
-                        </Grid>
-                    </Grid> */}
 
                     <Grid container item sm={3} md={3} lg={3} direction={'column'} justify={'flex-start'} alignItems={'stretch'} wrap="nowrap" className={classes.gridColumn}>
                         <Grid item className={classes.upperItem} >
@@ -385,6 +352,7 @@ class ProjectGrid extends React.Component {
                                 recom_entities={this.state.recom_entities}
                                 rating_list={this.state.rating_list}
                                 cluster_rating_list={this.state.cluster_rating_list}
+                                get_recom={this.get_recom}
                                 />
                         </Grid>
                         <Grid item >

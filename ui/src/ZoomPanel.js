@@ -269,7 +269,6 @@ class ZoomPanel extends React.Component {
                         zoom_dict = {this.props.zoom_dict}
                         cluster_x_min_max = {this.props.cluster_x_min_max}
                         cluster_y_min_max = {this.props.cluster_y_min_max}
-                        entity_clicked = {this.props.entity_clicked}
                         zoom_x_offset_end = {this.props.zoom_x_offset_end}
                         zoom_y_offset_end = {this.props.zoom_y_offset_end}
                         cluster_info = {this.props.cluster_info}

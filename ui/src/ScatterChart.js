@@ -46,7 +46,7 @@ export const ScatterChart = (props) => {
                         props.data[index].etype === 'doc'? (
                         <circle
                             key={index}
-                            r={3}
+                            r={2}
                             cx={xScale(props.data[index].x)}
                             cy={yScale(props.data[index].y)}
                             stroke={out_stroke}
@@ -57,8 +57,8 @@ export const ScatterChart = (props) => {
                             props.data[index].etype === 'word'? (
                                 <rect
                                     key={index}
-                                    width={6}
-                                    height={6}
+                                    width={4}
+                                    height={4}
                                     x={xScale(props.data[index].x)}
                                     y={yScale(props.data[index].y)}
                                     stroke={out_stroke}
@@ -68,8 +68,8 @@ export const ScatterChart = (props) => {
                                 ></rect>) : (
                                     <rect
                                         key={index}
-                                        width={6}
-                                        height={6}
+                                        width={4}
+                                        height={4}
                                         x={xScale(props.data[index].x)}
                                         y={yScale(props.data[index].y)}
                                         className={props.classes.dia}
@@ -84,7 +84,7 @@ export const ScatterChart = (props) => {
                         props.data[index].etype === 'doc'? 
                         (<circle
                             key={index}
-                            r={props.inclusters[index].is_selected === true? 12:3}
+                            r={props.inclusters[index].is_selected === true? 12:2}
                             cx={xScale(props.data[index].x)}
                             cy={yScale(props.data[index].y)}
                             className={props.inclusters[index].is_selected === true? props.classes.selectSymbol:null}
@@ -98,8 +98,8 @@ export const ScatterChart = (props) => {
                             props.data[index].etype === 'word'? 
                             (<rect
                                 key={index}
-                                width={props.inclusters[index].is_selected === true? 24:6}
-                                height={props.inclusters[index].is_selected === true? 24:6}
+                                width={props.inclusters[index].is_selected === true? 24:4}
+                                height={props.inclusters[index].is_selected === true? 24:4}
                                 className={props.inclusters[index].is_selected === true? props.classes.selectSymbol:null}
                                 x={xScale(props.data[index].x)}
                                 y={yScale(props.data[index].y)}
@@ -112,8 +112,8 @@ export const ScatterChart = (props) => {
                             : 
                             (<rect
                                 key={index}
-                                width={props.inclusters[index].is_selected === true? 24:6}
-                                height={props.inclusters[index].is_selected === true? 24:6}
+                                width={props.inclusters[index].is_selected === true? 24:4}
+                                height={props.inclusters[index].is_selected === true? 24:4}
                                 x={xScale(props.data[index].x)}
                                 y={yScale(props.data[index].y)}
                                 className={props.inclusters[index].is_selected === true? props.classes.diaSelected:props.classes.dia}

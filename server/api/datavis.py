@@ -8,6 +8,7 @@ from tsne import TSNE
 from sklearn.decomposition import PCA
 from scipy.spatial.distance import cdist
 from nonnegfac.nmf import NMF
+from nonnegfac.nnls import nnlsm_blockpivot
 
 EXP_VAR_CONST = 1.5
 EXP_VAR_CONST_ZOOM = 1
@@ -25,6 +26,56 @@ def get_answers(question):
 
 def filter_data(self, etype, qtree):
     print(1)
+
+def get_recom_objects(query_s):
+    items, clusters = query_s.split(",")
+    item_rate_dict={}
+    cluster_rate_dict={}
+    if len(items)>0:
+        for rate_s in items.split("_"):
+            item, rate = rate_s.split("-")
+            item_rate_dict[int(item)] = float(rate)
+    if len(clusters)>0:
+        for cluster_s in clusters.split("_"):
+            item, rate = cluster_s.split("-")
+            cluster_rate_dict[int(item)] = float(rate)
+    item_indices = np.array(list(pr.zoom_dict.keys()))
+    item_indices_dict = {
+        item_indices[i]:i for i in range(len(item_indices))
+    }
+    pr.R = np.zeros((len(item_indices), 10))
+    pr.R[:,4]=1
+    for i in item_rate_dict:
+        pr.R[item_indices_dict[i], 4] = 0
+        pr.R[item_indices_dict[i], int(2*item_rate_dict[i]-1)] = 1
+    for i in cluster_rate_dict:
+        a=[item_indices_dict[d] for d in pr.zoom_dict if pr.zoom_dict[d]['cid']==i]
+        pr.R[a,:] = 0
+        pr.R[a, int(2*cluster_rate_dict[i]-1)] = 1
+    P, info = nnlsm_blockpivot(pr.H_filtered_tsne, pr.R)
+    pr.Rhat = pr.H_filtered_tsne@P
+    for i in range(pr.Rhat.shape[1]):
+        pr.Rhat[:,i] *= (i+1)
+    avg_score = pr.Rhat.mean(axis=1)
+    recom_auth = []
+    recom_doc = []
+    recom_word = []
+    sorted_score_id = (-avg_score).argsort()
+    for r in sorted_score_id:
+        r = int(r)
+        if len(recom_auth) >=30 and len(recom_doc) >= 30 and len(recom_word) >= 30:
+            break
+        elif item_indices[r] < pr.n_a:
+            if len(recom_auth) < 30:
+                recom_auth.append(r)
+        elif item_indices[r] < pr.n_a+pr.n_d:
+            if len(recom_doc) < 30:
+                recom_doc.append(r)
+        elif item_indices[r] < pr.n_a+pr.n_d+pr.n_w:
+            if len(recom_word) < 30:
+                recom_word.append(r)
+    recom_list = recom_auth + recom_doc + recom_word
+    return recom_list
 
 def get_searchquery(query_text, mode="new"):
     query_tree = pr.query_dict[query_text]
@@ -68,13 +119,13 @@ def get_searchquery(query_text, mode="new"):
         except:
             W, H, info = NMF().run(pr.H_filtered, 20)
             sio.savemat("data/temp_matrix.mat", {"H":H, "W":W})
-    # elif query_text == '("neural" AND "network")  OR ("cancer")':
-        # try:
-        #     data = sio.loadmat("data/temp_matrix_bio.mat")
-        #     H,W = data["H"], data["W"]
-        # except:
-        #     W, H, info = NMF().run(pr.H_filtered, 20)
-        #     sio.savemat("data/temp_matrix_bio.mat", {"H":H})
+    elif query_text == '("neural" AND "network")  OR ("cancer")':
+        try:
+            data = sio.loadmat("data/temp_matrix_bio.mat")
+            H,W = data["H"], data["W"]
+        except:
+            W, H, info = NMF().run(pr.H_filtered, 20)
+            sio.savemat("data/temp_matrix_bio.mat", {"H":H, "W":W})
     else:
         W, H, info = NMF().run(pr.H_filtered, 20)
     cids=H.argmax(axis=1)

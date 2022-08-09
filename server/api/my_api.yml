@@ -49,6 +49,25 @@ definitions:
 
 # Paths supported by the server application
 paths:
+  /get_recom/{query_s}:
+    get:
+      operationId: datavis.get_recom_objects
+      tags:
+        - Get recommended objects
+      summary: Fetch recommended objects
+      parameters:
+        - name: query_s
+          in: path
+          description: query terms
+          type: string
+          required: true
+      responses:
+        200:
+          description: A list of entities containg the query word
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/docInstance'
   /text/{query_text}:
     get:
       operationId: datavis.get_searchquery

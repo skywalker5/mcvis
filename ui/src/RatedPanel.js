@@ -23,36 +23,21 @@ class RatedPanel extends React.Component {
           keyword: true
        };
   }
-
-  handleChange_auth = (event, click) => {
-    this.setState({
-        author: !this.state.author
-    });
-    axios.post(`${api}/entitychange_recom/auth_${this.state.author}`)
+  handleSubmit(event) {
+    event.preventDefault();
+    const query_s = Object.keys(this.props.rating_list).map(
+      (index) => (index+"-"+this.props.rating_list[index])
+    ).join('_');
+    const query_cs = Object.keys(this.props.cluster_rating_list).map(
+      (index) => (index+"-"+this.props.cluster_rating_list[index])
+    ).join('_');
+    axios.get(`${api}/get_recom/${query_s},${query_cs}`)
     .then(response => {
-        console.log(4)
-    });
-  };
+      this.props.get_recom(response.data)
+    })
+  
+  }
 
-  handleChange_doc = (event, click) => {
-    this.setState({
-        document: !this.state.document
-    });
-    axios.post(`${api}/entitychange_recom/doc_${this.state.document}`)
-    .then(response => {
-        console.log(5)
-    });
-  };
-
-  handleChange_word = (event, click) => {
-    this.setState({
-        keyword: !this.state.keyword
-    });
-    axios.post(`${api}/entitychange_recom/word_${this.state.keyword}`)
-    .then(response => {
-        console.log(6)
-    });
-  };
   render(){
     const {classes} = this.props;
     
@@ -140,28 +125,6 @@ class RatedPanel extends React.Component {
     const columns = [
       { field: 'Name', headerName: 'Name', flex: 0.4 },
       { field: 'Type', headerName: 'Type', flex: 0.2 }
-    ];
-    const qdata = [
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":1,"id":22451},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":2,"id":2241},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-      {"rating":4,"Co-authors":["Rémi Douence","Jean-Marc Menaud","M. Südholt","Fabien Hermenier"],"Name":"Luis Daniel Benavides Navarro","Papers":[2327],"Top Keywords":["grid","invas","pattern","checkpoint","topolog","wellknown","na","hamper","legaci","instanti"],"Type":"Author","cid":11,"id":2955},
-      {"rating":4,"Co-authors":["Jorge M. Santos","Chetak Kandaswamy","Joaquim Marques de Sá"],"Name":"Luís A. Alexandre","Papers":[11344],"Top Keywords":["deep","cost","finetun","supervis","reconstruct","layer","network","train","function","hidden"],"Type":"Author","cid":15,"id":2956},
-      {"rating":4,"Name":"cmac","Synonyms":["lyapunov","chatter","servo","timedelay","control","tank","closedloop","pid","torqu","reactor"],"Type":"Word","cid":16,"id":39456},
-      {"rating":4,"Name":"oil","Synonyms":["featur","select","cepstral","irrelev","abrupt","selector","roc","prerequisit","steel","mutual"],"Type":"Word","cid":6,"id":39478},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":3,"id":22451},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":11,"id":22451},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":11,"id":22451},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":11,"id":22451},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on computer architecture","cid":12,"id":2241},
-      {"rating":4,"Authors":["Benjamin C. Brodie","David E. Taylor","R Cytron"],"Cited":[],"Cited By":[],"Name":"A Scalable Architecture For High-Throughput Regular-Expression Pattern Matching","Top Keywords":["highthroughput","densiti","pattern","fpga","match","throughput","architectur","regular","asic","respond"],"Type":"Doc","Venue":"proceedings of the rd annual international symposium on architecture","cid":13,"id":2245},
-
     ];
 
     function ClusterRow(props) {
@@ -317,11 +280,13 @@ class RatedPanel extends React.Component {
             </Typography>
             </ThemeProvider>
             <ThemeProvider theme={rateTypoTheme}>
+              <form onSubmit={this.handleSubmit.bind(this)}>
               <Button className={classes.submitButton} type="submit" variant="contained" color = "primary">
                 {/* <EnterOutline height="15px" color={'white'}/> */}
                 <ExitToAppIcon className={classes.submitIcon}/>
                 <Typography variant="h6">Submit</Typography>
               </Button>
+              </form>
             </ThemeProvider>
           </Stack>
           {/* <Grid container direction="row" className={classes.zoomGrid} spacing={0}>

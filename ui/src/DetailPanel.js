@@ -94,8 +94,6 @@ class DetailPanel extends React.Component {
 
       const handleChange_rate = (event, newRate) => {
         props.set_rating_list({[row.id]: newRate});
-        // axios.post(`${api}/ratechange/${row.id}`+","+`${newRate}`)
-        // props.entity_clicked(1);
       };
       return (
         <React.Fragment>
@@ -256,11 +254,8 @@ class DetailPanel extends React.Component {
                 {Object.keys(this.props.query_data).map((index) => (
                   <Row key={index} row={this.props.query_data[index]} 
                   rate={(this.props.rating_list[this.props.query_data[index].id]==undefined)? 2.5:this.props.rating_list[this.props.query_data[index].id]}
-                  entity_clicked={this.props.entity_clicked} set_rating_list={this.props.set_rating_list}/>
+                  set_rating_list={this.props.set_rating_list}/>
                 ))}
-                {/* {Object.keys(qdata).map((index) => (
-                  <Row key={index} row={qdata[index]} entity_clicked={this.props.entity_clicked}/>
-                ))} */}
               </TableBody>
               </ThemeProvider>
             </Table>

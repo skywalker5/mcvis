@@ -245,8 +245,8 @@ class RecommendPanel extends React.Component {
                     </ThemeProvider>
                     <ThemeProvider theme={tableBodyTheme}>
                     <TableBody>
-                      {dat.map((cid) => (
-                        <TableRow id={cid.id} sx={{ '& > *': { borderBottom: 'unset' } }}>
+                      {this.props.recom_entities.map((cid) => (
+                        <TableRow id={cid} sx={{ '& > *': { borderBottom: 'unset' } }}>
                           <TableCell padding="checkbox">
                             <Checkbox
                               size="small"
@@ -261,12 +261,12 @@ class RecommendPanel extends React.Component {
                           </TableCell>
                           <TableCell align="left">
                             <Typography variant="h6">
-                              {cid.Name}
+                              {this.props.query_data[cid].Name}
                             </Typography>
                           </TableCell>
                           <TableCell align="left">
                             <Typography variant="h6">
-                              {cid.Type}
+                              {this.props.query_data[cid].Type}
                             </Typography>
                           </TableCell>
                         </TableRow>
